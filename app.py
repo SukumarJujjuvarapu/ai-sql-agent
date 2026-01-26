@@ -36,7 +36,12 @@ PRICING = {
 }
 
 # App Database (for users, history, subscriptions)
-APP_DB_PATH = "app_database.db"
+# Use /tmp for cloud deployment (Streamlit Cloud has writable /tmp)
+import tempfile
+if os.path.exists("/tmp"):
+    APP_DB_PATH = "/tmp/app_database.db"
+else:
+    APP_DB_PATH = "app_database.db"
 
 # Default sample database - works locally and on cloud
 DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "Chinook_Sqlite.sqlite")
