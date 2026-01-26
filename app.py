@@ -597,107 +597,140 @@ if "current_question" not in st.session_state:
 # ============================================================
 
 st.markdown("""
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-    /* ========== GLOBAL STYLES ========== */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    /* ========== ROOT VARIABLES ========== */
+    :root {
+        --primary: #667eea;
+        --primary-dark: #5a67d8;
+        --secondary: #764ba2;
+        --accent: #f093fb;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --error: #ef4444;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --text-muted: #64748b;
+        --bg-light: #f8fafc;
+        --bg-card: rgba(255, 255, 255, 0.95);
+        --border-light: #e2e8f0;
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+        --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+        --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     
-    /* Prevent horizontal scroll on mobile */
+    /* ========== GLOBAL STYLES ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+        box-sizing: border-box;
+    }
+    
     html, body, [data-testid="stAppViewContainer"] {
         overflow-x: hidden !important;
         max-width: 100vw !important;
     }
     
-    /* Font Awesome icon styling */
-    .fa-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .icon-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
     .stApp {
-        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf4 50%, #dfe6f0 100%);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
-    /* Hide default Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     
+    /* ========== TYPOGRAPHY ========== */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif;
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        line-height: 1.3;
+    }
+    
+    p, span, label, div {
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
     /* ========== MAIN HEADER ========== */
     .main-header {
-        font-family: 'Inter', sans-serif;
-        font-size: 3rem;
+        font-size: clamp(1.5rem, 5vw, 3rem);
         font-weight: 800;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
-        padding: 1.5rem 0;
-        letter-spacing: -1px;
-        animation: fadeInDown 0.8s ease-out;
+        padding: 1rem 0.5rem;
+        letter-spacing: -0.5px;
+        animation: fadeInDown 0.6s ease-out;
     }
     
     @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-20px); }
+        from { opacity: 0; transform: translateY(-15px); }
         to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ========== HERO SUBTITLE ========== */
+    .hero-subtitle {
+        text-align: center;
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        color: var(--text-muted) !important;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+        padding: 0 1rem;
+        line-height: 1.6;
     }
     
     /* ========== GLASSMORPHISM CARDS ========== */
     .glass-card {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 2rem;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: clamp(1rem, 3vw, 2rem);
+        box-shadow: var(--shadow-md);
     }
     
     /* ========== TIER BADGES ========== */
     .tier-badge {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding: 0.4rem 1rem;
         border-radius: 25px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow-sm);
     }
-    .tier-free { 
-        background: linear-gradient(135deg, #e2e8f0, #cbd5e1); 
-        color: #475569; 
-    }
-    .tier-starter { 
-        background: linear-gradient(135deg, #60a5fa, #3b82f6); 
-        color: white; 
-    }
-    .tier-pro { 
-        background: linear-gradient(135deg, #fbbf24, #f59e0b); 
-        color: white; 
-    }
-    .tier-enterprise { 
-        background: linear-gradient(135deg, #34d399, #10b981); 
-        color: white; 
-    }
+    .tier-free { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); color: #475569; }
+    .tier-starter { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; }
+    .tier-pro { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
+    .tier-enterprise { background: linear-gradient(135deg, #34d399, #10b981); color: white; }
     
     /* ========== PRICING CARDS ========== */
     .pricing-card {
-        background: rgba(255, 255, 255, 0.95);
+        background: var(--bg-card);
         backdrop-filter: blur(10px);
-        border: 2px solid #e2e8f0;
-        border-radius: 24px;
-        padding: 2rem;
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-xl);
+        padding: clamp(1rem, 3vw, 2rem);
         text-align: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: var(--transition);
         position: relative;
         overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
     .pricing-card::before {
         content: '';
@@ -706,116 +739,154 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
     .pricing-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-        border-color: #667eea;
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
     }
     .pricing-card h3 {
-        font-size: 1.3rem;
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
         margin-bottom: 0.5rem;
-        color: #1e293b !important;
+        color: var(--text-primary) !important;
         font-weight: 700 !important;
     }
-    .pricing-card p {
-        color: #374151 !important;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin: 0.4rem 0;
-    }
     .pricing-card h2 {
-        font-size: 2.5rem;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
         font-weight: 800;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0.5rem 0;
     }
+    .pricing-card p {
+        color: var(--text-secondary) !important;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
+        line-height: 1.5;
+        margin: 0.3rem 0;
+    }
+    .pricing-card hr {
+        margin: 0.75rem 0;
+        opacity: 0.3;
+    }
+    
+    /* ========== FEATURE CARDS ========== */
+    .feature-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: clamp(1rem, 2.5vw, 1.5rem);
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        border: 1px solid #f1f5f9;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 160px;
+    }
+    .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+    .feature-card h4 {
+        color: var(--text-primary) !important;
+        font-size: clamp(0.85rem, 2vw, 1rem) !important;
+        font-weight: 600 !important;
+        margin: 0.5rem 0 0.3rem 0 !important;
+    }
+    .feature-card p {
+        color: var(--text-muted) !important;
+        font-size: clamp(0.7rem, 1.8vw, 0.85rem) !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+    }
+    .feature-icon {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        margin-bottom: 0.5rem;
+    }
     
     /* ========== BUTTONS ========== */
-    .stButton>button {
+    .stButton > button {
         width: 100%;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         font-weight: 600;
-        padding: 0.6rem 1.5rem;
-        transition: all 0.3s ease;
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        padding: 0.7rem 1.2rem;
+        transition: var(--transition);
         border: none;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: var(--shadow-sm);
+        min-height: 44px;
+        cursor: pointer;
     }
-    .stButton>button:hover {
+    .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        box-shadow: var(--shadow-md);
     }
-    
-    /* Primary buttons */
-    .stButton>button[kind="primary"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .stButton > button:active {
+        transform: scale(0.98);
+    }
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
         color: white;
     }
     
     /* ========== FORM INPUTS ========== */
-    .stTextInput>div>div>input {
-        border-radius: 12px;
-        border: 2px solid #e2e8f0;
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
+    .stTextInput > div > div > input,
+    .stTextArea textarea {
+        border-radius: var(--radius-md);
+        border: 2px solid var(--border-light);
+        padding: 0.75rem 1rem;
+        font-size: 16px !important;
+        transition: var(--transition);
+        background: white;
     }
-    .stTextInput>div>div>input:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    .stTextInput > div > div > input:focus,
+    .stTextArea textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+        outline: none;
     }
     
-    /* Form labels - DARK TEXT for visibility */
-    .stTextInput label, .stSelectbox label, .stFileUploader label {
-        color: #1e293b !important;
+    /* Form labels */
+    .stTextInput label, .stSelectbox label, .stFileUploader label, .stTextArea label {
+        color: var(--text-primary) !important;
         font-weight: 500 !important;
         font-size: 0.9rem !important;
+        margin-bottom: 0.3rem;
     }
     
-    /* All h4 headings - ensure dark color */
-    h2, h3, h4, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
-        color: #1e293b !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Main content area text */
-    [data-testid="stAppViewContainer"] p,
-    [data-testid="stAppViewContainer"] span,
-    [data-testid="stAppViewContainer"] label {
-        color: #1e293b;
-    }
-    
-    /* Tabs - fix styling */
+    /* ========== TABS ========== */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 0 !important;
-        background: #f1f5f9 !important;
-        border-radius: 12px !important;
+        gap: 4px !important;
+        background: rgba(241, 245, 249, 0.8) !important;
+        border-radius: var(--radius-md) !important;
         padding: 4px !important;
+        flex-wrap: wrap;
     }
     .stTabs [data-baseweb="tab"] {
-        border-radius: 10px !important;
+        border-radius: var(--radius-sm) !important;
         font-weight: 600 !important;
-        padding: 10px 24px !important;
-        color: #475569 !important;
+        padding: 10px 16px !important;
+        color: var(--text-secondary) !important;
         background: transparent !important;
+        font-size: 0.9rem;
+        white-space: nowrap;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #667eea, #764ba2) !important;
+        background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
         color: white !important;
     }
-    .stTabs [data-baseweb="tab-border"] {
-        display: none !important;
-    }
+    .stTabs [data-baseweb="tab-border"],
     .stTabs [data-baseweb="tab-highlight"] {
         display: none !important;
     }
     
     /* ========== SIDEBAR ========== */
-    .css-1d391kg, [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%) !important;
     }
     [data-testid="stSidebar"] * {
         color: #e2e8f0 !important;
@@ -824,531 +895,438 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 600 !important;
     }
-    [data-testid="stSidebar"] .stProgress > div > div {
-        background: linear-gradient(90deg, #667eea, #764ba2) !important;
-    }
+    [data-testid="stSidebar"] .stProgress > div > div,
     [data-testid="stSidebar"] .stProgress > div > div > div {
-        background: linear-gradient(90deg, #667eea, #764ba2) !important;
+        background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
     }
-    /* Sidebar radio labels */
     [data-testid="stSidebar"] .stRadio label {
         color: #ffffff !important;
+    }
+    [data-testid="stSidebar"] .stButton > button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    [data-testid="stSidebar"] .stButton > button:hover {
+        background: rgba(255, 255, 255, 0.2);
     }
     
     /* ========== DATA DISPLAY ========== */
     .stDataFrame {
-        border-radius: 16px;
+        border-radius: var(--radius-lg);
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-shadow: var(--shadow-sm);
     }
     
-    /* ========== FEATURE CARDS ========== */
-    .feature-card {
-        background: white;
-        border-radius: 16px;
-        padding: 1.5rem;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
-        border: 1px solid #f1f5f9;
-        min-height: 180px;
-    }
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-    }
-    .feature-card h4 {
-        color: #1e293b !important;
-        font-size: 1rem !important;
-        font-weight: 600 !important;
-        margin: 0.75rem 0 0.5rem 0 !important;
-        display: block !important;
-        visibility: visible !important;
-    }
-    .feature-card p {
-        color: #64748b !important;
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
-        margin: 0 !important;
-    }
-    .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-    
-    /* ========== INFO/SUCCESS/ERROR BOXES ========== */
+    /* ========== ALERTS ========== */
     .stAlert {
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         border: none;
-    }
-    
-    /* ========== TABS ========== */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: rgba(255,255,255,0.5);
-        border-radius: 12px;
-        padding: 4px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px;
-        font-weight: 600;
-        padding: 10px 20px;
-    }
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white !important;
-    }
-    
-    /* ========== EXPANDERS ========== */
-    .streamlit-expanderHeader {
-        background: rgba(255,255,255,0.7);
-        border-radius: 12px;
-        font-weight: 600;
-    }
-    
-    /* ========== CODE BLOCKS ========== */
-    .stCodeBlock {
-        border-radius: 12px;
-    }
-    
-    /* ========== METRICS ========== */
-    [data-testid="stMetricValue"] {
-        font-size: 2rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    /* ========== ANIMATIONS ========== */
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
-    }
-    .pulse {
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-20px); }
-        to { opacity: 1; transform: translateX(0); }
-    }
-    .slide-in {
-        animation: slideIn 0.5s ease-out;
-    }
-    
-    /* ========== HERO SECTION ========== */
-    .hero-subtitle {
-        text-align: center;
-        font-size: 1.2rem;
-        color: #64748b;
-        margin-bottom: 2rem;
-        font-weight: 400;
+        padding: 0.75rem 1rem;
     }
     
     /* ========== DOWNLOAD BUTTONS ========== */
-    .stDownloadButton>button {
-        background: linear-gradient(135deg, #10b981, #059669);
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, var(--success), #059669);
         color: white;
         border: none;
-        border-radius: 10px;
-    }
-    .stDownloadButton>button:hover {
-        background: linear-gradient(135deg, #059669, #047857);
+        border-radius: var(--radius-md);
     }
     
     /* ========== SELECTBOX ========== */
-    .stSelectbox>div>div {
-        border-radius: 12px;
+    .stSelectbox > div > div {
+        border-radius: var(--radius-md);
     }
     
     /* ========== PROGRESS BAR ========== */
     .stProgress > div > div > div {
-        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-        border-radius: 10px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        border-radius: var(--radius-sm);
     }
     
     /* ========== FILE UPLOADER ========== */
     .stFileUploader {
-        border: 2px dashed #667eea;
-        border-radius: 16px;
+        border: 2px dashed var(--primary);
+        border-radius: var(--radius-lg);
         padding: 1rem;
-        background: rgba(102, 126, 234, 0.05);
+        background: rgba(102, 126, 234, 0.03);
+        transition: var(--transition);
+    }
+    .stFileUploader:hover {
+        background: rgba(102, 126, 234, 0.08);
+        border-color: var(--secondary);
     }
     
     /* ========== DIVIDER ========== */
     hr {
         border: none;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #667eea, transparent);
-        margin: 2rem 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        margin: 1.5rem 0;
     }
     
-    /* ========== MOBILE RESPONSIVE STYLES ========== */
+    /* ========== EXPANDERS ========== */
+    .streamlit-expanderHeader {
+        background: rgba(255,255,255,0.8);
+        border-radius: var(--radius-md);
+        font-weight: 600;
+    }
+    
+    /* ========== CODE BLOCKS ========== */
+    .stCodeBlock {
+        border-radius: var(--radius-md);
+    }
+    
+    /* ========== METRICS ========== */
+    [data-testid="stMetricValue"] {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    /* ========== TRUST ITEMS ========== */
+    .trust-item {
+        text-align: center;
+        padding: 0.75rem;
+    }
+    .trust-item i {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin-bottom: 0.5rem;
+    }
+    .trust-item p {
+        color: var(--text-secondary) !important;
+        font-size: clamp(0.75rem, 1.8vw, 0.9rem) !important;
+        font-weight: 500;
+        margin-top: 0.3rem;
+    }
+    
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.5s ease-out; }
+    .slide-up { animation: slideUp 0.5s ease-out; }
+    
+    /* ========================================================
+                    RESPONSIVE BREAKPOINTS
+    ======================================================== */
+    
+    /* TABLETS (768px - 1024px) */
+    @media screen and (max-width: 1024px) {
+        .pricing-card {
+            padding: 1.25rem;
+        }
+        .feature-card {
+            min-height: 150px;
+        }
+    }
+    
+    /* MOBILE LANDSCAPE & SMALL TABLETS (576px - 768px) */
     @media screen and (max-width: 768px) {
-        /* Main header - smaller on mobile */
-        .main-header {
-            font-size: 1.6rem !important;
-            padding: 0.8rem 0.5rem !important;
-            line-height: 1.4 !important;
-            word-wrap: break-word !important;
+        /* Layout */
+        [data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+            gap: 0.75rem !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            flex: 1 1 calc(50% - 0.5rem) !important;
+            min-width: calc(50% - 0.5rem) !important;
+            max-width: 100% !important;
         }
         
-        /* Hero subtitle */
+        /* Typography */
+        .main-header {
+            font-size: 1.5rem !important;
+            padding: 0.75rem !important;
+        }
         .hero-subtitle {
             font-size: 0.9rem !important;
-            padding: 0 0.5rem !important;
-            line-height: 1.6 !important;
-            word-wrap: break-word !important;
+            padding: 0 0.75rem !important;
         }
         
-        /* All text elements - ensure visibility */
-        p, span, label, div {
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-        }
-        
-        /* Feature cards - FIXED for mobile */
-        .feature-card {
-            padding: 1rem !important;
-            margin-bottom: 0.75rem !important;
-            min-height: 140px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-        .feature-card h4 {
-            font-size: 0.85rem !important;
-            line-height: 1.3 !important;
-            margin: 0.5rem 0 0.3rem 0 !important;
-            color: #1e293b !important;
-            font-weight: 600 !important;
-            display: block !important;
-            visibility: visible !important;
-        }
-        .feature-card p {
-            font-size: 0.7rem !important;
-            line-height: 1.3 !important;
-            color: #64748b !important;
-            margin: 0 !important;
-        }
-        .feature-icon {
-            margin-bottom: 0.3rem !important;
-        }
-        .feature-icon i {
-            font-size: 1.5rem !important;
-        }
-        
-        /* Trust indicators - better mobile visibility */
-        .trust-item {
-            text-align: center;
-            padding: 0.5rem;
-        }
-        .trust-item i {
-            font-size: 1.5rem !important;
-        }
-        .trust-item p {
-            font-size: 0.75rem !important;
-            margin-top: 0.3rem !important;
-            color: #64748b !important;
-        }
-        
-        /* Pricing cards - mobile optimized */
+        /* Cards */
         .pricing-card {
             padding: 1rem !important;
-            margin-bottom: 1rem;
-            border-radius: 14px !important;
+            margin-bottom: 0.75rem;
         }
-        .pricing-card h2 {
-            font-size: 1.6rem !important;
-            line-height: 1.2 !important;
-        }
-        .pricing-card h3 {
-            font-size: 1rem !important;
-        }
-        .pricing-card p {
-            font-size: 0.8rem !important;
-            margin: 0.25rem 0 !important;
-            line-height: 1.4 !important;
-        }
-        .pricing-card i {
-            font-size: 0.8rem !important;
-        }
+        .pricing-card h2 { font-size: 1.5rem !important; }
+        .pricing-card h3 { font-size: 0.95rem !important; }
+        .pricing-card p { font-size: 0.8rem !important; margin: 0.2rem 0 !important; }
         
-        /* Buttons - full width and touch-friendly */
+        .feature-card {
+            padding: 0.875rem !important;
+            min-height: 130px !important;
+        }
+        .feature-card h4 { font-size: 0.85rem !important; }
+        .feature-card p { font-size: 0.75rem !important; }
+        .feature-icon { font-size: 1.75rem !important; }
+        
+        /* Buttons */
         .stButton > button {
-            padding: 0.75rem 0.8rem !important;
+            padding: 0.6rem 0.75rem !important;
             font-size: 0.85rem !important;
-            min-height: 44px !important;
-            white-space: normal !important;
-            word-wrap: break-word !important;
         }
         
-        /* Form inputs - larger touch targets */
+        /* Forms */
         .stTextInput > div > div > input {
-            padding: 0.8rem 0.75rem !important;
-            font-size: 16px !important; /* Prevents zoom on iOS */
+            padding: 0.7rem !important;
         }
         
-        /* Labels and captions */
-        .stTextInput label, .stSelectbox label {
-            font-size: 0.85rem !important;
-        }
-        .stCaption, [data-testid="stCaptionContainer"] {
-            font-size: 0.75rem !important;
-            line-height: 1.4 !important;
-        }
-        
-        /* Sidebar adjustments */
-        [data-testid="stSidebar"] {
-            min-width: 240px !important;
-            padding: 0.5rem !important;
-        }
-        [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4 {
-            font-size: 1rem !important;
-            line-height: 1.3 !important;
-        }
-        [data-testid="stSidebar"] p, [data-testid="stSidebar"] span {
-            font-size: 0.85rem !important;
-        }
-        
-        /* Tabs - scrollable on mobile */
-        .stTabs [data-baseweb="tab-list"] {
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            gap: 4px !important;
-            padding: 2px !important;
-        }
+        /* Tabs */
         .stTabs [data-baseweb="tab"] {
             padding: 8px 12px !important;
             font-size: 0.8rem !important;
-            white-space: nowrap;
         }
         
-        /* Data tables - horizontal scroll */
-        .stDataFrame {
+        /* Sidebar */
+        [data-testid="stSidebar"] {
+            min-width: 260px !important;
+        }
+        
+        /* Section headers */
+        h3, h4 {
+            font-size: 1rem !important;
+        }
+        
+        /* Footer */
+        .footer-container {
+            padding: 1.25rem 1rem !important;
+        }
+        .footer-links {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+        }
+        .footer-divider { display: none !important; }
+    }
+    
+    /* MOBILE PORTRAIT (max-width: 576px) */
+    @media screen and (max-width: 576px) {
+        /* Stack everything vertically */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        /* Typography */
+        .main-header {
+            font-size: 1.35rem !important;
+            padding: 0.5rem !important;
+            line-height: 1.3 !important;
+        }
+        .hero-subtitle {
+            font-size: 0.85rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* Cards - full width, compact */
+        .pricing-card {
+            padding: 0.875rem !important;
+            border-radius: 14px !important;
+        }
+        .pricing-card h2 { font-size: 1.4rem !important; }
+        .pricing-card h3 { font-size: 0.9rem !important; }
+        .pricing-card p { 
+            font-size: 0.75rem !important; 
+            line-height: 1.4 !important;
+            margin: 0.15rem 0 !important;
+        }
+        .pricing-card i { font-size: 0.75rem !important; }
+        .pricing-card hr { margin: 0.5rem 0 !important; }
+        
+        .feature-card {
+            padding: 0.75rem !important;
+            min-height: 110px !important;
+            border-radius: 12px !important;
+        }
+        .feature-card h4 { font-size: 0.8rem !important; }
+        .feature-card p { font-size: 0.7rem !important; }
+        .feature-icon { font-size: 1.5rem !important; margin-bottom: 0.3rem !important; }
+        
+        /* Buttons - full touch targets */
+        .stButton > button {
+            padding: 0.65rem !important;
+            font-size: 0.8rem !important;
+            min-height: 44px !important;
+        }
+        
+        /* Forms - prevent iOS zoom */
+        .stTextInput > div > div > input {
+            font-size: 16px !important;
+            padding: 0.65rem !important;
+        }
+        
+        /* Tabs - horizontal scroll */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-wrap: nowrap !important;
             overflow-x: auto !important;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+            display: none;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: 8px 14px !important;
+            font-size: 0.78rem !important;
+            flex-shrink: 0;
+        }
+        
+        /* Section headers */
+        h3, h4 {
+            font-size: 0.95rem !important;
+            line-height: 1.3 !important;
+        }
+        h3 i, h4 i {
+            font-size: 0.9rem !important;
+            margin-right: 6px !important;
+        }
+        
+        /* Sidebar */
+        [data-testid="stSidebar"] {
+            padding: 0.5rem !important;
+        }
+        [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4 {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Trust items */
+        .trust-item i { font-size: 1.4rem !important; }
+        .trust-item p { font-size: 0.7rem !important; }
+        
+        /* Alerts */
+        .stAlert {
+            padding: 0.6rem !important;
             font-size: 0.8rem !important;
         }
         
-        /* Download buttons - stack */
+        /* Code blocks */
+        .stCodeBlock {
+            font-size: 0.7rem !important;
+        }
+        
+        /* Footer */
+        .footer-container {
+            padding: 1rem 0.75rem !important;
+            border-radius: 12px !important;
+            margin-top: 1.5rem !important;
+        }
+        .footer-brand { flex-direction: column !important; gap: 4px !important; }
+        .footer-logo { font-size: 1.2rem !important; }
+        .footer-title { font-size: 1rem !important; }
+        .footer-tagline { font-size: 0.75rem !important; }
+        .footer-link {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.8rem !important;
+            width: 80% !important;
+        }
+        .footer-bottom p { font-size: 0.7rem !important; }
+        .footer-copyright { font-size: 0.65rem !important; }
+        
+        /* Data tables */
+        .stDataFrame {
+            font-size: 0.75rem !important;
+        }
+        
+        /* Download buttons */
         .stDownloadButton > button {
-            padding: 0.6rem 0.5rem !important;
-            font-size: 0.8rem !important;
-            min-height: 40px !important;
-        }
-        
-        /* Columns - prevent overflow */
-        [data-testid="column"] {
-            padding: 0 0.15rem !important;
-            min-width: 0 !important;
+            font-size: 0.78rem !important;
+            padding: 0.5rem !important;
         }
         
         /* File uploader */
         .stFileUploader {
             padding: 0.6rem !important;
         }
-        .stFileUploader label {
-            font-size: 0.85rem !important;
-        }
-        
-        /* Expanders */
-        .streamlit-expanderHeader {
-            font-size: 0.85rem !important;
-            padding: 0.6rem !important;
-            line-height: 1.3 !important;
-        }
-        
-        /* Footer - mobile optimized */
-        .footer-container {
-            padding: 20px 12px !important;
-            margin-top: 25px !important;
-            border-radius: 14px !important;
-        }
-        .footer-brand {
-            flex-direction: column !important;
-            gap: 6px !important;
-        }
-        .footer-logo {
-            font-size: 1.3rem !important;
-        }
-        .footer-title {
-            font-size: 1.1rem !important;
-        }
-        .footer-tagline {
-            font-size: 0.8rem !important;
-            padding: 0 8px !important;
-            line-height: 1.4 !important;
-        }
-        .footer-links {
-            flex-direction: column !important;
-            gap: 8px !important;
-        }
-        .footer-link {
-            padding: 8px 16px !important;
-            width: 85% !important;
-            justify-content: center;
-            font-size: 0.85rem !important;
-        }
-        .footer-divider {
-            display: none !important;
-        }
-        .footer-bottom p {
-            font-size: 0.8rem !important;
-            line-height: 1.4 !important;
-        }
-        .footer-copyright {
-            font-size: 0.7rem !important;
-        }
-        
-        /* Section headers */
-        h3, h4 {
-            font-size: 1rem !important;
-            line-height: 1.3 !important;
-            word-wrap: break-word !important;
-        }
-        h3 i, h4 i {
-            font-size: 1rem !important;
-            margin-right: 6px !important;
-        }
-        
-        /* Info boxes */
-        .stAlert {
-            padding: 0.6rem !important;
-            font-size: 0.85rem !important;
-            line-height: 1.4 !important;
-        }
-        .stAlert p {
-            font-size: 0.85rem !important;
-            line-height: 1.4 !important;
-        }
-        
-        /* Code blocks */
-        .stCodeBlock {
-            font-size: 0.75rem !important;
-            overflow-x: auto !important;
-        }
-        .stCodeBlock code {
-            white-space: pre-wrap !important;
-            word-break: break-all !important;
-        }
-        
-        /* Selectbox */
-        .stSelectbox > div > div {
-            font-size: 0.85rem !important;
-        }
-        
-        /* Radio buttons */
-        .stRadio label {
-            font-size: 0.85rem !important;
-        }
-        .stRadio [data-testid="stMarkdownContainer"] {
-            font-size: 0.85rem !important;
-        }
-        
-        /* Markdown text */
-        [data-testid="stMarkdownContainer"] p {
-            font-size: 0.9rem !important;
-            line-height: 1.5 !important;
-        }
-        
-        /* Trust indicators */
-        .trust-indicator h3 {
-            font-size: 1.5rem !important;
-        }
-        .trust-indicator p {
-            font-size: 0.8rem !important;
-        }
     }
     
-    /* Extra small devices */
-    @media screen and (max-width: 480px) {
-        .main-header {
-            font-size: 1.3rem !important;
-            padding: 0.5rem !important;
-        }
-        
-        .hero-subtitle {
-            font-size: 0.8rem !important;
-        }
-        
-        .pricing-card {
-            padding: 0.8rem !important;
-        }
-        .pricing-card h2 {
-            font-size: 1.4rem !important;
-        }
-        .pricing-card p {
-            font-size: 0.75rem !important;
-        }
-        
-        .feature-card {
-            padding: 0.75rem !important;
-        }
-        .feature-card h4 {
-            font-size: 0.85rem !important;
-        }
-        .feature-icon i {
-            font-size: 1.3rem !important;
-        }
-        
-        /* Stack columns vertically */
-        [data-testid="stHorizontalBlock"] {
-            flex-direction: column !important;
-            gap: 0.5rem !important;
-        }
-        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-            width: 100% !important;
-            max-width: 100% !important;
-            flex: 1 1 100% !important;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Buttons even smaller */
-        .stButton > button {
-            font-size: 0.8rem !important;
-            padding: 0.6rem !important;
-        }
-        
-        /* Section headers */
-        h3, h4 {
-            font-size: 0.95rem !important;
-            color: #1e293b !important;
-        }
-        
-        /* Ensure all text is visible on mobile */
-        .pricing-card h3, .pricing-card p, .feature-card h4, .feature-card p {
-            color: #1e293b !important;
-        }
+    /* EXTRA SMALL (max-width: 375px) */
+    @media screen and (max-width: 375px) {
+        .main-header { font-size: 1.2rem !important; }
+        .hero-subtitle { font-size: 0.8rem !important; }
+        .pricing-card h2 { font-size: 1.25rem !important; }
+        .pricing-card p { font-size: 0.7rem !important; }
+        .feature-card { min-height: 100px !important; }
+        .stButton > button { font-size: 0.75rem !important; }
     }
     
-    /* Touch-friendly improvements */
+    /* ========== TOUCH DEVICE OPTIMIZATIONS ========== */
     @media (hover: none) and (pointer: coarse) {
-        .stButton > button:active {
-            transform: scale(0.98);
-        }
-        
-        .pricing-card:active {
-            transform: scale(0.98);
-        }
-        
-        .feature-card:active {
-            transform: scale(0.98);
-        }
-        
-        /* Disable hover effects that don't work on touch */
-        .pricing-card:hover {
-            transform: none;
-        }
+        /* Disable hover transforms on touch */
+        .pricing-card:hover,
         .feature-card:hover {
             transform: none;
         }
+        
+        /* Active states for touch feedback */
+        .pricing-card:active,
+        .feature-card:active,
+        .stButton > button:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        /* Larger touch targets */
+        .stRadio label,
+        .stCheckbox label {
+            padding: 0.5rem 0;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
     }
-</link>
+    
+    /* ========== LANDSCAPE MOBILE ========== */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+        .main-header { font-size: 1.2rem !important; padding: 0.3rem !important; }
+        .hero-subtitle { font-size: 0.8rem !important; margin-bottom: 0.5rem !important; }
+        .pricing-card, .feature-card { padding: 0.6rem !important; }
+    }
+    
+    /* ========== HIGH DPI DISPLAYS ========== */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .glass-card, .pricing-card, .feature-card {
+            border-width: 0.5px;
+        }
+    }
+    
+    /* ========== DARK MODE SUPPORT (if user prefers) ========== */
+    @media (prefers-color-scheme: dark) {
+        /* Keep light theme for now but ready for future */
+    }
+    
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* ========== PRINT STYLES ========== */
+    @media print {
+        .stButton, [data-testid="stSidebar"], .footer-container {
+            display: none !important;
+        }
+        .stApp {
+            background: white !important;
+        }
+    }
+</style>
 """, unsafe_allow_html=True)
 
 # ============================================================
@@ -2066,7 +2044,7 @@ st.markdown(
             </a>
         </div>
         <div class="footer-bottom">
-            <p><i class="fa-solid fa-flag" style="color: #ff9933;"></i>Developed by <b>Sukumar Jujjuvarapu</b></p>
+            <p><i class="fa-solid fa-flag" style="color: #ff9933;"></i> Developed by <b>Sukumar Jujjuvarapu</b></p>
             <p class="footer-copyright">© 2025 AI Data Analyst Pro. All rights reserved.</p>
         </div>
     </div>
