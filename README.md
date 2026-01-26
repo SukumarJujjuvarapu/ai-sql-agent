@@ -1,17 +1,27 @@
 # 🤖 AI Data Analyst Pro
 
-> **Transform your data into insights using natural language** - A revenue-generating SaaS application
+> **Transform your data into insights using natural language** - Ask questions in English, get SQL results instantly!
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Click_Here-brightgreen?style=for-the-badge)](https://sukumarjujjuvarapu-ai-sql-agent.streamlit.app/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io/)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
-[![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)](https://stripe.com/)
+[![Made in India](https://img.shields.io/badge/Made_in-India_🇮🇳-orange?style=for-the-badge)]()
+
+---
+
+## 🎯 What is this?
+
+Upload any database (CSV, Excel, SQLite) and ask questions in **plain English**. The AI converts your question to SQL, runs it, and shows you beautiful charts!
+
+**Example:**
+> "Show me top 10 customers by total sales" → Instant bar chart with data
 
 ---
 
 ## ✨ Features
 
-| Feature | Free | Starter ($9/mo) | Pro ($29/mo) | Enterprise ($99/mo) |
-|---------|------|-----------------|--------------|---------------------|
+| Feature | Free | Starter (₹499/mo) | Pro (₹1,499/mo) | Enterprise (₹4,999/mo) |
+|---------|------|-------------------|-----------------|------------------------|
 | Queries/day | 5 | 50 | 500 | Unlimited |
 | CSV Upload | ✅ | ✅ | ✅ | ✅ |
 | Excel Upload | ❌ | ✅ | ✅ | ✅ |
@@ -20,173 +30,133 @@
 | PDF Export | ❌ | ❌ | ✅ | ✅ |
 | Priority Support | ❌ | ❌ | ❌ | ✅ |
 
-### Core Capabilities
-- 📤 **Upload CSV/Excel/SQLite** - Bring your own data
-- 🗣️ **English → SQL via LLM** - Ask questions in plain English
-- 📊 **Charts & Dashboards** - Bar, Line, Pie, Scatter, Area charts
-- 🔐 **User Authentication** - Secure login/register system
-- 📜 **Query History** - Save and replay past queries
-- 📥 **Export PDF/Excel/CSV** - Download your results
-- 💳 **Stripe Payments** - Subscription billing built-in
+### 🔥 Core Capabilities
+
+- 📤 **Multi-format Upload** - CSV, Excel (.xlsx), SQLite databases
+- 🗣️ **Natural Language Queries** - Ask in English, get SQL results
+- 📊 **Smart Charts** - Bar, Line, Pie, Scatter, Area (auto-suggested)
+- 🔐 **User Authentication** - Secure login & registration
+- 📜 **Query History** - Save, view, and replay past queries
+- 📥 **Export Options** - Download as PDF, Excel, or CSV
+- 💳 **Razorpay Payments** - Subscription billing (India)
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Live Demo
 
-### 1. Clone & Install
+👉 **[Try it now!](https://sukumarjujjuvarapu-ai-sql-agent.streamlit.app/)**
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Frontend | Streamlit |
+| AI/LLM | Groq (Llama 3.3-70b) |
+| Database | SQLite |
+| Charts | Plotly |
+| Payments | Razorpay |
+| Hosting | Streamlit Cloud |
+| PDF Export | ReportLab |
+
+---
+
+## 📦 Local Installation
+
+### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/ai-data-analyst-pro.git
-cd ai-data-analyst-pro
+git clone https://github.com/SukumarJujjuvarapu/ai-sql-agent.git
+cd ai-sql-agent
+```
+
+### 2. Install dependencies
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 3. Set up environment variables
 ```bash
-# Copy the example environment file
-copy .env.example .env   # Windows
-cp .env.example .env     # Mac/Linux
+# Create .env file
+copy .env.example .env
 
-# Edit .env with your API keys
+# Add your keys to .env:
+# GROQ_API_KEY=your_groq_api_key
+# RAZORPAY_KEY_ID=your_razorpay_key (optional)
+# RAZORPAY_KEY_SECRET=your_razorpay_secret (optional)
 ```
 
-### 3. Run the App
+### 4. Run the app
 ```bash
 streamlit run app.py
 ```
 
-Open http://localhost:8501 in your browser!
+### 5. Open in browser
+```
+http://localhost:8501
+```
 
 ---
 
-## 🔧 Configuration
+## 🔑 API Keys
 
-### Required API Keys
-
-1. **Groq API Key** (for LLM)
-   - Go to https://console.groq.com/keys
-   - Create a new API key
-   - Add to `.env`: `GROQ_API_KEY=gsk_xxxxx`
-
-2. **Stripe Keys** (for payments)
-   - Go to https://dashboard.stripe.com/apikeys
-   - Copy your test keys first
-   - Add to `.env`:
-     ```
-     STRIPE_SECRET_KEY=sk_test_xxxxx
-     STRIPE_PUBLISHABLE_KEY=pk_test_xxxxx
-     ```
-
-### Setting Up Stripe Products
-
-1. Go to https://dashboard.stripe.com/products
-2. Create 3 products: Starter, Pro, Enterprise
-3. Add monthly pricing to each
-4. Copy the Price IDs to your `.env` file
+| Service | Purpose | Get it from |
+|---------|---------|-------------|
+| Groq | AI/LLM for SQL generation | [console.groq.com](https://console.groq.com/) |
+| Razorpay | Payments (optional) | [dashboard.razorpay.com](https://dashboard.razorpay.com/) |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-ai-data-analyst-pro/
-├── app.py                 # Main Streamlit application
-├── config.py              # Configuration settings
-├── requirements.txt       # Python dependencies
+ai-sql-agent/
+├── app.py                 # Main application
+├── config.py              # Configuration
+├── requirements.txt       # Dependencies
 ├── .env.example           # Environment template
-├── .env                   # Your secrets (git-ignored)
-├── app_database.db        # User/history database (auto-created)
 ├── Chinook_Sqlite.sqlite  # Sample database
-└── uploads/               # User uploaded files
-    └── user_{id}/         # Per-user upload folders
+├── docs/
+│   └── index.html         # Landing page
+└── README.md
 ```
 
 ---
 
-## 🌐 Deployment
+## 🎬 How It Works
 
-### Deploy to Streamlit Cloud (Free)
-
-1. Push code to GitHub
-2. Go to https://share.streamlit.io/
-3. Connect your repo
-4. Add secrets in Streamlit Cloud dashboard:
-   ```toml
-   GROQ_API_KEY = "gsk_xxxxx"
-   STRIPE_SECRET_KEY = "sk_live_xxxxx"
-   STRIPE_PUBLISHABLE_KEY = "pk_live_xxxxx"
-   ```
-
-### Deploy to Railway/Render
-
-```bash
-# Procfile
-web: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
-```
-
-### Deploy with Docker
-
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 8501
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-```
+1. **Upload** your database (CSV/Excel/SQLite)
+2. **Ask** a question in plain English
+3. **AI** converts it to SQL using Llama 3.3
+4. **Results** displayed as table + chart
+5. **Export** as PDF/Excel/CSV
 
 ---
 
-## 💳 Stripe Webhook Setup
+## 📊 Sample Queries
 
-For production, set up webhooks to handle subscription events:
+Try these with the sample Chinook database:
 
-1. Go to https://dashboard.stripe.com/webhooks
-2. Add endpoint: `https://yourdomain.com/webhook`
-3. Select events:
-   - `checkout.session.completed`
-   - `customer.subscription.updated`
-   - `customer.subscription.deleted`
-4. Copy webhook secret to `.env`
+- "Show total sales by country"
+- "Top 10 customers by purchase amount"
+- "Monthly revenue trend for 2023"
+- "Which genre has the most tracks?"
+- "Average invoice total by city"
 
 ---
 
-## 🔒 Security Checklist
+## 🤝 Contributing
 
-- [ ] Never commit `.env` file
-- [ ] Use environment variables for all secrets
-- [ ] Enable HTTPS in production
-- [ ] Use Stripe's live keys only in production
-- [ ] Regularly rotate API keys
-- [ ] Add rate limiting for production
+Contributions welcome! Feel free to:
+- 🐛 Report bugs
+- 💡 Suggest features
+- 🔧 Submit PRs
 
 ---
 
-## 📈 Revenue Model
+## 📄 License
 
-| Tier | Monthly | Yearly | Target Users |
-|------|---------|--------|--------------|
-| Free | $0 | $0 | Lead generation |
-| Starter | $9 | $90 | Individual analysts |
-| Pro | $29 | $290 | Small teams |
-| Enterprise | $99 | $990 | Organizations |
-
-**Potential MRR with 100 paid users:**
-- 50 Starter × $9 = $450
-- 40 Pro × $29 = $1,160
-- 10 Enterprise × $99 = $990
-- **Total: $2,600/month**
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend:** Streamlit
-- **Backend:** Python, SQLite
-- **AI/LLM:** Groq (Llama 3.3 70B)
-- **Payments:** Stripe
-- **Charts:** Plotly, Matplotlib
-- **Export:** ReportLab (PDF), OpenPyXL (Excel)
+MIT License - feel free to use for your own projects!
 
 ---
 
@@ -194,20 +164,15 @@ For production, set up webhooks to handle subscription events:
 
 **Sukumar Jujjuvarapu**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sukumar-jujjuvarapu/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SukumarJujjuvarapu)
-[![Portfolio](https://img.shields.io/badge/Portfolio-255E63?style=for-the-badge&logo=About.me&logoColor=white)](https://sukumarjujjuvarapu.github.io/)
+- GitHub: [@SukumarJujjuvarapu](https://github.com/SukumarJujjuvarapu)
+- Live App: [AI Data Analyst Pro](https://sukumarjujjuvarapu-ai-sql-agent.streamlit.app/)
 
 ---
 
-## 📄 License
+## ⭐ Star this repo!
 
-MIT License - feel free to use for your own SaaS!
+If you found this useful, give it a ⭐ on GitHub!
 
 ---
 
-## 🙏 Support
-
-If you find this useful, please ⭐ the repo!
-
-For business inquiries: sukumar@yourdomain.com
+*Built with ❤️ in India 🇮🇳*
