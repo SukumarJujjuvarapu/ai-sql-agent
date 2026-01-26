@@ -717,31 +717,15 @@ def show_pricing_page():
             <p>❌ PDF export</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("Upgrade to Starter", key="starter_btn"):
-            # Create Razorpay order
-            order, error = create_razorpay_order(st.session_state.user["id"], "starter")
-            if order:
-                st.session_state.pending_order = order
-                st.session_state.pending_tier = "starter"
-                st.info(f"🔐 Order created! Order ID: {order['id']}")
-                st.markdown(f"""
-                **To complete payment:**
-                1. Note Order ID: `{order['id']}`
-                2. Amount: ₹499
-                3. Payment will be enabled after Razorpay verification
-                
-                *For demo, click below to simulate upgrade:*
-                """)
-                if st.button("✅ Simulate Payment Success", key="sim_starter"):
-                    upgrade_user_subscription(st.session_state.user["id"], "starter", 30)
-                    st.session_state.user["subscription_tier"] = "starter"
-                    st.success("🎉 Upgraded to Starter!")
-                    st.rerun()
-            else:
-                # Demo mode - direct upgrade
+        
+        if st.session_state.user["subscription_tier"] == "starter":
+            st.button("✅ Current Plan", disabled=True, key="starter_current")
+        else:
+            if st.button("🚀 Upgrade to Starter - ₹499", key="starter_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "starter", 30)
                 st.session_state.user["subscription_tier"] = "starter"
-                st.success("🎉 Upgraded to Starter!")
+                st.success("🎉 Upgraded to Starter! (Demo Mode)")
+                st.balloons()
                 st.rerun()
     
     with col3:
@@ -758,21 +742,15 @@ def show_pricing_page():
             <p>✅ PDF export</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("Upgrade to Pro", key="pro_btn"):
-            order, error = create_razorpay_order(st.session_state.user["id"], "pro")
-            if order:
-                st.session_state.pending_order = order
-                st.session_state.pending_tier = "pro"
-                st.info(f"🔐 Order created! Order ID: {order['id']}")
-                if st.button("✅ Simulate Payment Success", key="sim_pro"):
-                    upgrade_user_subscription(st.session_state.user["id"], "pro", 30)
-                    st.session_state.user["subscription_tier"] = "pro"
-                    st.success("🎉 Upgraded to Pro!")
-                    st.rerun()
-            else:
+        
+        if st.session_state.user["subscription_tier"] == "pro":
+            st.button("✅ Current Plan", disabled=True, key="pro_current")
+        else:
+            if st.button("⭐ Upgrade to Pro - ₹1,499", key="pro_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "pro", 30)
                 st.session_state.user["subscription_tier"] = "pro"
-                st.success("🎉 Upgraded to Pro!")
+                st.success("🎉 Upgraded to Pro! (Demo Mode)")
+                st.balloons()
                 st.rerun()
     
     with col4:
@@ -789,8 +767,20 @@ def show_pricing_page():
             <p>✅ All exports</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("Contact Sales", key="enterprise_btn"):
-            st.info("📧 Contact: sukumar@yourdomain.com")
+        
+        if st.session_state.user["subscription_tier"] == "enterprise":
+            st.button("✅ Current Plan", disabled=True, key="enterprise_current")
+        else:
+            if st.button("🏢 Upgrade to Enterprise - ₹4,999", key="enterprise_btn", use_container_width=True):
+                upgrade_user_subscription(st.session_state.user["id"], "enterprise", 30)
+                st.session_state.user["subscription_tier"] = "enterprise"
+                st.success("🎉 Upgraded to Enterprise! (Demo Mode)")
+                st.balloons()
+                st.rerun()
+    
+    # Payment Notice
+    st.divider()
+    st.info("💡 **Demo Mode:** Upgrades are instant for testing. Real payments via Razorpay coming soon!")
 
 # ============================================================
 #                    MAIN APPLICATION
