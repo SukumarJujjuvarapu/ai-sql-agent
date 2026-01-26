@@ -760,6 +760,44 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
     }
     
+    /* Form labels - DARK TEXT for visibility */
+    .stTextInput label, .stSelectbox label, .stFileUploader label {
+        color: #1e293b !important;
+        font-weight: 500 !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* All h4 headings - ensure dark color */
+    h4, .stMarkdown h4 {
+        color: #1e293b !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Tabs - fix styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0 !important;
+        background: #f1f5f9 !important;
+        border-radius: 12px !important;
+        padding: 4px !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 10px !important;
+        font-weight: 600 !important;
+        padding: 10px 24px !important;
+        color: #475569 !important;
+        background: transparent !important;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #667eea, #764ba2) !important;
+        color: white !important;
+    }
+    .stTabs [data-baseweb="tab-border"] {
+        display: none !important;
+    }
+    .stTabs [data-baseweb="tab-highlight"] {
+        display: none !important;
+    }
+    
     /* ========== SIDEBAR ========== */
     .css-1d391kg, [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
@@ -1302,7 +1340,7 @@ def show_auth_page():
         tab1, tab2 = st.tabs(["Login", "Register"])
         
         with tab1:
-            st.markdown('<h4><i class="fa-solid fa-hand-wave" style="color: #667eea; margin-right: 8px;"></i>Welcome Back!</h4>', unsafe_allow_html=True)
+            st.markdown('<h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-hand-wave" style="color: #667eea; margin-right: 8px;"></i>Welcome Back!</h4>', unsafe_allow_html=True)
             with st.form("login_form"):
                 email = st.text_input("Email", placeholder="you@example.com")
                 password = st.text_input("Password", type="password", placeholder="••••••••")
@@ -1323,7 +1361,7 @@ def show_auth_page():
                         st.warning("⚠️ Please fill in all fields")
         
         with tab2:
-            st.markdown('<h4><i class="fa-solid fa-sparkles" style="color: #667eea; margin-right: 8px;"></i>Create Your Account</h4>', unsafe_allow_html=True)
+            st.markdown('<h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-sparkles" style="color: #667eea; margin-right: 8px;"></i>Create Your Account</h4>', unsafe_allow_html=True)
             with st.form("register_form"):
                 name = st.text_input("Full Name", placeholder="John Doe")
                 email = st.text_input("Email", placeholder="you@example.com", key="reg_email")
