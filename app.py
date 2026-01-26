@@ -1058,238 +1058,425 @@ st.markdown("""
     
     /* MOBILE LANDSCAPE & SMALL TABLETS (576px - 768px) */
     @media screen and (max-width: 768px) {
-        /* Layout */
+        /* Main container padding */
+        [data-testid="stAppViewContainer"] > div {
+            padding: 0.5rem !important;
+        }
+        
+        /* Layout - 2 columns on tablet */
         [data-testid="stHorizontalBlock"] {
             flex-wrap: wrap !important;
             gap: 0.75rem !important;
+            margin: 0 !important;
         }
         [data-testid="stHorizontalBlock"] > [data-testid="column"] {
             flex: 1 1 calc(50% - 0.5rem) !important;
             min-width: calc(50% - 0.5rem) !important;
-            max-width: 100% !important;
-        }
-        
-        /* Typography */
-        .main-header {
-            font-size: 1.5rem !important;
-            padding: 0.75rem !important;
-        }
-        .hero-subtitle {
-            font-size: 0.9rem !important;
-            padding: 0 0.75rem !important;
-        }
-        
-        /* Cards */
-        .pricing-card {
-            padding: 1rem !important;
-            margin-bottom: 0.75rem;
-        }
-        .pricing-card h2 { font-size: 1.5rem !important; }
-        .pricing-card h3 { font-size: 0.95rem !important; }
-        .pricing-card p { font-size: 0.8rem !important; margin: 0.2rem 0 !important; }
-        
-        .feature-card {
-            padding: 0.875rem !important;
-            min-height: 130px !important;
-        }
-        .feature-card h4 { font-size: 0.85rem !important; }
-        .feature-card p { font-size: 0.75rem !important; }
-        .feature-icon { font-size: 1.75rem !important; }
-        
-        /* Buttons */
-        .stButton > button {
-            padding: 0.6rem 0.75rem !important;
-            font-size: 0.85rem !important;
-        }
-        
-        /* Forms */
-        .stTextInput > div > div > input {
-            padding: 0.7rem !important;
-        }
-        
-        /* Tabs */
-        .stTabs [data-baseweb="tab"] {
-            padding: 8px 12px !important;
-            font-size: 0.8rem !important;
-        }
-        
-        /* Sidebar */
-        [data-testid="stSidebar"] {
-            min-width: 260px !important;
-        }
-        
-        /* Section headers */
-        h3, h4 {
-            font-size: 1rem !important;
-        }
-        
-        /* Footer */
-        .footer-container {
-            padding: 1.25rem 1rem !important;
-        }
-        .footer-links {
-            flex-direction: column !important;
-            gap: 0.5rem !important;
-        }
-        .footer-divider { display: none !important; }
-    }
-    
-    /* MOBILE PORTRAIT (max-width: 576px) */
-    @media screen and (max-width: 576px) {
-        /* Stack everything vertically */
-        [data-testid="stHorizontalBlock"] {
-            flex-direction: column !important;
-            gap: 0.5rem !important;
-        }
-        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-            flex: 1 1 100% !important;
-            width: 100% !important;
-            min-width: 100% !important;
             max-width: 100% !important;
             padding: 0 !important;
         }
         
         /* Typography */
         .main-header {
-            font-size: 1.35rem !important;
-            padding: 0.5rem !important;
-            line-height: 1.3 !important;
+            font-size: 1.6rem !important;
+            padding: 0.75rem 0.5rem !important;
+            margin: 0 !important;
         }
         .hero-subtitle {
-            font-size: 0.85rem !important;
-            line-height: 1.5 !important;
+            font-size: 0.95rem !important;
+            padding: 0 0.5rem !important;
+            margin-bottom: 1rem !important;
         }
         
-        /* Cards - full width, compact */
+        /* Pricing Cards */
         .pricing-card {
-            padding: 0.875rem !important;
-            border-radius: 14px !important;
+            padding: 1rem !important;
+            margin-bottom: 0.75rem !important;
+            border-radius: 16px !important;
         }
-        .pricing-card h2 { font-size: 1.4rem !important; }
-        .pricing-card h3 { font-size: 0.9rem !important; }
-        .pricing-card p { 
-            font-size: 0.75rem !important; 
-            line-height: 1.4 !important;
-            margin: 0.15rem 0 !important;
-        }
-        .pricing-card i { font-size: 0.75rem !important; }
-        .pricing-card hr { margin: 0.5rem 0 !important; }
+        .pricing-card h2 { font-size: 1.6rem !important; }
+        .pricing-card h3 { font-size: 1rem !important; color: #1e293b !important; }
+        .pricing-card p { font-size: 0.85rem !important; margin: 0.3rem 0 !important; color: #374151 !important; }
+        .pricing-card hr { margin: 0.75rem 0 !important; }
         
+        /* Feature Cards */
         .feature-card {
-            padding: 0.75rem !important;
-            min-height: 110px !important;
-            border-radius: 12px !important;
+            padding: 1rem !important;
+            min-height: 140px !important;
+            margin-bottom: 0.5rem !important;
         }
-        .feature-card h4 { font-size: 0.8rem !important; }
-        .feature-card p { font-size: 0.7rem !important; }
-        .feature-icon { font-size: 1.5rem !important; margin-bottom: 0.3rem !important; }
+        .feature-card h4 { font-size: 0.9rem !important; color: #1e293b !important; }
+        .feature-card p { font-size: 0.8rem !important; color: #64748b !important; }
+        .feature-icon { font-size: 2rem !important; }
         
-        /* Buttons - full touch targets */
+        /* Buttons */
         .stButton > button {
-            padding: 0.65rem !important;
-            font-size: 0.8rem !important;
-            min-height: 44px !important;
+            padding: 0.7rem 1rem !important;
+            font-size: 0.9rem !important;
+            min-height: 48px !important;
         }
         
-        /* Forms - prevent iOS zoom */
+        /* Forms */
         .stTextInput > div > div > input {
+            padding: 0.75rem !important;
             font-size: 16px !important;
-            padding: 0.65rem !important;
         }
         
-        /* Tabs - horizontal scroll */
+        /* Tabs */
         .stTabs [data-baseweb="tab-list"] {
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
-            display: none;
+            gap: 4px !important;
+            padding: 4px !important;
         }
         .stTabs [data-baseweb="tab"] {
-            padding: 8px 14px !important;
-            font-size: 0.78rem !important;
-            flex-shrink: 0;
+            padding: 10px 16px !important;
+            font-size: 0.85rem !important;
         }
         
         /* Section headers */
-        h3, h4 {
-            font-size: 0.95rem !important;
-            line-height: 1.3 !important;
-        }
-        h3 i, h4 i {
-            font-size: 0.9rem !important;
-            margin-right: 6px !important;
-        }
-        
-        /* Sidebar */
-        [data-testid="stSidebar"] {
-            padding: 0.5rem !important;
-        }
-        [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4 {
-            font-size: 0.95rem !important;
-        }
-        
-        /* Trust items */
-        .trust-item i { font-size: 1.4rem !important; }
-        .trust-item p { font-size: 0.7rem !important; }
-        
-        /* Alerts */
-        .stAlert {
-            padding: 0.6rem !important;
-            font-size: 0.8rem !important;
-        }
-        
-        /* Code blocks */
-        .stCodeBlock {
-            font-size: 0.7rem !important;
+        h3, h4, .stMarkdown h3, .stMarkdown h4 {
+            font-size: 1.1rem !important;
+            color: #1e293b !important;
+            margin-bottom: 0.75rem !important;
         }
         
         /* Footer */
         .footer-container {
-            padding: 1rem 0.75rem !important;
-            border-radius: 12px !important;
-            margin-top: 1.5rem !important;
+            padding: 1.5rem 1rem !important;
+            margin-top: 2rem !important;
         }
-        .footer-brand { flex-direction: column !important; gap: 4px !important; }
-        .footer-logo { font-size: 1.2rem !important; }
-        .footer-title { font-size: 1rem !important; }
-        .footer-tagline { font-size: 0.75rem !important; }
-        .footer-link {
-            padding: 0.5rem 1rem !important;
+        .footer-links {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 0.75rem !important;
+        }
+        .footer-link { width: auto !important; }
+    }
+    
+    /* ==========================================
+       MOBILE PORTRAIT - PRIMARY FOCUS
+       ========================================== */
+    @media screen and (max-width: 576px) {
+        /* GLOBAL MOBILE FIXES */
+        html, body {
+            overflow-x: hidden !important;
+        }
+        
+        [data-testid="stAppViewContainer"] {
+            padding: 0 !important;
+        }
+        
+        [data-testid="stAppViewContainer"] > div {
+            padding: 0.25rem !important;
+        }
+        
+        /* Stack ALL columns vertically */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 0.25rem !important;
+            margin: 0 !important;
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        .main-header {
+            font-size: 1.4rem !important;
+            padding: 0.5rem !important;
+            line-height: 1.3 !important;
+            text-align: center !important;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.9rem !important;
+            line-height: 1.5 !important;
+            padding: 0 0.75rem !important;
+            margin-bottom: 1.25rem !important;
+            color: #64748b !important;
+        }
+        
+        /* ===== PRICING CARDS ===== */
+        .pricing-card {
+            padding: 1.25rem !important;
+            border-radius: 16px !important;
+            margin-bottom: 1rem !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        .pricing-card h3 {
+            font-size: 1.1rem !important;
+            color: #1e293b !important;
+            font-weight: 700 !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .pricing-card h2 {
+            font-size: 1.75rem !important;
+            margin: 0.5rem 0 !important;
+        }
+        .pricing-card p {
+            font-size: 0.85rem !important;
+            line-height: 1.5 !important;
+            margin: 0.35rem 0 !important;
+            color: #374151 !important;
+        }
+        .pricing-card i {
+            font-size: 0.85rem !important;
+            margin-right: 8px !important;
+        }
+        .pricing-card hr {
+            margin: 1rem 0 !important;
+        }
+        .pricing-card > div:first-child {
+            font-size: 2.5rem !important;
+        }
+        
+        /* ===== FEATURE CARDS ===== */
+        .feature-card {
+            padding: 1.25rem !important;
+            min-height: 130px !important;
+            border-radius: 14px !important;
+            margin-bottom: 0.75rem !important;
+            width: 100% !important;
+        }
+        .feature-card h4 {
+            font-size: 0.95rem !important;
+            color: #1e293b !important;
+            font-weight: 600 !important;
+            margin: 0.5rem 0 0.25rem 0 !important;
+        }
+        .feature-card p {
             font-size: 0.8rem !important;
-            width: 80% !important;
+            color: #64748b !important;
+            line-height: 1.4 !important;
         }
-        .footer-bottom p { font-size: 0.7rem !important; }
-        .footer-copyright { font-size: 0.65rem !important; }
+        .feature-icon {
+            font-size: 2rem !important;
+            margin-bottom: 0.5rem !important;
+        }
         
-        /* Data tables */
+        /* ===== TRUST ITEMS ===== */
+        .trust-item {
+            padding: 0.75rem !important;
+            text-align: center !important;
+        }
+        .trust-item i {
+            font-size: 1.75rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .trust-item p {
+            font-size: 0.8rem !important;
+            color: #475569 !important;
+            font-weight: 500 !important;
+        }
+        
+        /* ===== BUTTONS ===== */
+        .stButton > button {
+            padding: 0.75rem 1rem !important;
+            font-size: 0.9rem !important;
+            min-height: 50px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            width: 100% !important;
+        }
+        
+        /* ===== FORM INPUTS ===== */
+        .stTextInput > div > div > input,
+        .stTextArea textarea {
+            font-size: 16px !important;
+            padding: 0.875rem !important;
+            border-radius: 12px !important;
+        }
+        
+        .stTextInput label,
+        .stSelectbox label,
+        .stTextArea label {
+            font-size: 0.9rem !important;
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            margin-bottom: 0.4rem !important;
+        }
+        
+        /* ===== TABS ===== */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            scrollbar-width: none !important;
+            padding: 4px !important;
+            gap: 4px !important;
+        }
+        .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+            display: none !important;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: 12px 18px !important;
+            font-size: 0.85rem !important;
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+        }
+        
+        /* ===== SECTION HEADERS ===== */
+        h3, h4, .stMarkdown h3, .stMarkdown h4 {
+            font-size: 1rem !important;
+            line-height: 1.4 !important;
+            color: #1e293b !important;
+            font-weight: 600 !important;
+            margin-bottom: 0.75rem !important;
+        }
+        h3 i, h4 i {
+            font-size: 1rem !important;
+            margin-right: 8px !important;
+        }
+        
+        /* ===== SIDEBAR ===== */
+        [data-testid="stSidebar"] {
+            width: 280px !important;
+            padding: 1rem 0.75rem !important;
+        }
+        [data-testid="stSidebar"] h3 {
+            font-size: 1.1rem !important;
+        }
+        [data-testid="stSidebar"] h4 {
+            font-size: 1rem !important;
+        }
+        
+        /* ===== ALERTS/INFO BOXES ===== */
+        .stAlert {
+            padding: 0.875rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 12px !important;
+        }
+        .stAlert p {
+            font-size: 0.875rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* ===== DATA TABLES ===== */
         .stDataFrame {
-            font-size: 0.75rem !important;
+            font-size: 0.8rem !important;
+            border-radius: 12px !important;
+            overflow-x: auto !important;
         }
         
-        /* Download buttons */
+        /* ===== CODE BLOCKS ===== */
+        .stCodeBlock {
+            font-size: 0.75rem !important;
+            border-radius: 10px !important;
+        }
+        .stCodeBlock code {
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+        }
+        
+        /* ===== DOWNLOAD BUTTONS ===== */
         .stDownloadButton > button {
-            font-size: 0.78rem !important;
+            font-size: 0.85rem !important;
+            padding: 0.65rem 1rem !important;
+            min-height: 44px !important;
+        }
+        
+        /* ===== FILE UPLOADER ===== */
+        .stFileUploader {
+            padding: 1rem !important;
+            border-radius: 14px !important;
+        }
+        .stFileUploader label {
+            font-size: 0.9rem !important;
+        }
+        
+        /* ===== SELECTBOX ===== */
+        .stSelectbox > div > div {
+            font-size: 0.9rem !important;
             padding: 0.5rem !important;
         }
         
-        /* File uploader */
-        .stFileUploader {
-            padding: 0.6rem !important;
+        /* ===== RADIO BUTTONS ===== */
+        .stRadio label {
+            font-size: 0.9rem !important;
+            padding: 0.5rem 0 !important;
+            min-height: 44px !important;
+        }
+        
+        /* ===== EXPANDERS ===== */
+        .streamlit-expanderHeader {
+            font-size: 0.9rem !important;
+            padding: 0.75rem !important;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer-container {
+            padding: 1.25rem 1rem !important;
+            border-radius: 16px !important;
+            margin-top: 2rem !important;
+        }
+        .footer-brand {
+            flex-direction: column !important;
+            gap: 6px !important;
+        }
+        .footer-logo {
+            font-size: 1.5rem !important;
+        }
+        .footer-title {
+            font-size: 1.1rem !important;
+        }
+        .footer-tagline {
+            font-size: 0.85rem !important;
+            padding: 0 0.5rem !important;
+            line-height: 1.5 !important;
+        }
+        .footer-links {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+        }
+        .footer-link {
+            padding: 0.75rem 1.25rem !important;
+            font-size: 0.9rem !important;
+            width: 90% !important;
+            justify-content: center !important;
+        }
+        .footer-divider {
+            display: none !important;
+        }
+        .footer-bottom p {
+            font-size: 0.8rem !important;
+            line-height: 1.5 !important;
+        }
+        .footer-copyright {
+            font-size: 0.7rem !important;
+        }
+        
+        /* ===== DIVIDERS ===== */
+        hr {
+            margin: 1.25rem 0 !important;
+        }
+        
+        /* ===== CAPTIONS ===== */
+        .stCaption, [data-testid="stCaptionContainer"] {
+            font-size: 0.8rem !important;
         }
     }
     
-    /* EXTRA SMALL (max-width: 375px) */
+    /* EXTRA SMALL DEVICES (max-width: 375px) */
     @media screen and (max-width: 375px) {
-        .main-header { font-size: 1.2rem !important; }
-        .hero-subtitle { font-size: 0.8rem !important; }
-        .pricing-card h2 { font-size: 1.25rem !important; }
-        .pricing-card p { font-size: 0.7rem !important; }
-        .feature-card { min-height: 100px !important; }
-        .stButton > button { font-size: 0.75rem !important; }
+        .main-header { font-size: 1.25rem !important; }
+        .hero-subtitle { font-size: 0.85rem !important; }
+        .pricing-card { padding: 1rem !important; }
+        .pricing-card h2 { font-size: 1.5rem !important; }
+        .pricing-card h3 { font-size: 1rem !important; }
+        .pricing-card p { font-size: 0.8rem !important; }
+        .feature-card { min-height: 120px !important; padding: 1rem !important; }
+        .feature-card h4 { font-size: 0.9rem !important; }
+        .stButton > button { font-size: 0.85rem !important; }
+        .footer-link { width: 95% !important; }
     }
     
     /* ========== TOUCH DEVICE OPTIMIZATIONS ========== */
@@ -1297,24 +1484,49 @@ st.markdown("""
         /* Disable hover transforms on touch */
         .pricing-card:hover,
         .feature-card:hover {
-            transform: none;
+            transform: none !important;
         }
         
         /* Active states for touch feedback */
         .pricing-card:active,
         .feature-card:active,
         .stButton > button:active {
-            transform: scale(0.98);
-            opacity: 0.9;
+            transform: scale(0.98) !important;
+            opacity: 0.9 !important;
         }
         
         /* Larger touch targets */
         .stRadio label,
         .stCheckbox label {
-            padding: 0.5rem 0;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
+            padding: 0.75rem 0 !important;
+            min-height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        /* Better button touch targets */
+        .stButton > button {
+            min-height: 50px !important;
+            cursor: pointer !important;
+        }
+        
+        /* Select boxes touch friendly */
+        .stSelectbox > div > div {
+            min-height: 50px !important;
+            padding: 0.75rem !important;
+        }
+        
+        /* Tabs touch friendly */
+        .stTabs [data-baseweb="tab"] {
+            min-height: 48px !important;
+            padding: 14px 20px !important;
+        }
+        
+        /* Links touch friendly */
+        a, .footer-link {
+            min-height: 44px !important;
+            display: inline-flex !important;
+            align-items: center !important;
         }
     }
     
@@ -1322,7 +1534,20 @@ st.markdown("""
     @media screen and (max-height: 500px) and (orientation: landscape) {
         .main-header { font-size: 1.2rem !important; padding: 0.3rem !important; }
         .hero-subtitle { font-size: 0.8rem !important; margin-bottom: 0.5rem !important; }
-        .pricing-card, .feature-card { padding: 0.6rem !important; }
+        .pricing-card, .feature-card { padding: 0.75rem !important; }
+        .pricing-card h2 { font-size: 1.3rem !important; }
+        .feature-icon { font-size: 1.75rem !important; }
+        .stButton > button { min-height: 44px !important; padding: 0.5rem 0.75rem !important; }
+        
+        /* Horizontal layout in landscape */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            flex: 1 1 45% !important;
+            min-width: 45% !important;
+        }
     }
     
     /* ========== HIGH DPI DISPLAYS ========== */
