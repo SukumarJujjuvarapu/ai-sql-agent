@@ -689,7 +689,7 @@ st.markdown("""
     
     /* ========== PRICING CARDS ========== */
     .pricing-card {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 2px solid #e2e8f0;
         border-radius: 24px;
@@ -716,6 +716,14 @@ st.markdown("""
     .pricing-card h3 {
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
+        color: #1e293b !important;
+        font-weight: 700 !important;
+    }
+    .pricing-card p {
+        color: #374151 !important;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0.4rem 0;
     }
     .pricing-card h2 {
         font-size: 2.5rem;
@@ -768,9 +776,16 @@ st.markdown("""
     }
     
     /* All h4 headings - ensure dark color */
-    h4, .stMarkdown h4 {
+    h2, h3, h4, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
         color: #1e293b !important;
         font-weight: 600 !important;
+    }
+    
+    /* Main content area text */
+    [data-testid="stAppViewContainer"] p,
+    [data-testid="stAppViewContainer"] span,
+    [data-testid="stAppViewContainer"] label {
+        color: #1e293b;
     }
     
     /* Tabs - fix styling */
@@ -805,8 +820,19 @@ st.markdown("""
     [data-testid="stSidebar"] * {
         color: #e2e8f0 !important;
     }
+    [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4 {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
     [data-testid="stSidebar"] .stProgress > div > div {
-        background: linear-gradient(90deg, #667eea, #764ba2);
+        background: linear-gradient(90deg, #667eea, #764ba2) !important;
+    }
+    [data-testid="stSidebar"] .stProgress > div > div > div {
+        background: linear-gradient(90deg, #667eea, #764ba2) !important;
+    }
+    /* Sidebar radio labels */
+    [data-testid="stSidebar"] .stRadio label {
+        color: #ffffff !important;
     }
     
     /* ========== DATA DISPLAY ========== */
@@ -1461,7 +1487,7 @@ def show_pricing_page():
     """Display pricing page"""
     st.markdown('''
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-gem" style="color: #667eea; margin-right: 12px;"></i>Choose Your Plan</h1>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: #1e293b;"><i class="fa-solid fa-gem" style="color: #667eea; margin-right: 12px;"></i>Choose Your Plan</h1>
         <p style="color: #64748b; font-size: 1.1rem;">Unlock the full power of AI data analysis</p>
     </div>
     ''', unsafe_allow_html=True)
@@ -1472,13 +1498,13 @@ def show_pricing_page():
         st.markdown("""
         <div class="pricing-card">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-gift" style="color: #64748b;"></i></div>
-            <h3 style="margin: 0;">Free</h3>
-            <h2>₹0</h2>
+            <h3 style="margin: 0; color: #1e293b; font-weight: 700;">Free</h3>
+            <h2 style="color: #667eea;">₹0</h2>
             <p style="color: #64748b;">Forever free</p>
             <hr style="margin: 1rem 0;">
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>5 queries/day</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Basic charts</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>CSV upload</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>5 queries/day</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Basic charts</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>CSV upload</p>
             <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>Query history</p>
             <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>PDF export</p>
         </div>
@@ -1491,14 +1517,14 @@ def show_pricing_page():
         <div class="pricing-card" style="border-color: #3b82f6; border-width: 2px;">
             <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">POPULAR</div>
             <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-rocket" style="color: #3b82f6;"></i></div>
-            <h3 style="margin: 0;">Starter</h3>
-            <h2>₹499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <h3 style="margin: 0; color: #1e293b; font-weight: 700;">Starter</h3>
+            <h2 style="color: #667eea;">₹499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For individuals</p>
             <hr style="margin: 1rem 0;">
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>50 queries/day</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Excel upload</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Query history</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>50 queries/day</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Excel upload</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Query history</p>
             <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>PDF export</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1518,15 +1544,15 @@ def show_pricing_page():
         <div class="pricing-card" style="border-color: #f59e0b; border-width: 2px;">
             <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">BEST VALUE</div>
             <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-star" style="color: #f59e0b;"></i></div>
-            <h3 style="margin: 0;">Pro</h3>
-            <h2>₹1,499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <h3 style="margin: 0; color: #1e293b; font-weight: 700;">Pro</h3>
+            <h2 style="color: #667eea;">₹1,499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For teams</p>
             <hr style="margin: 1rem 0;">
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>500 queries/day</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All file types</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>PDF export</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>500 queries/day</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All file types</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1544,15 +1570,15 @@ def show_pricing_page():
         st.markdown("""
         <div class="pricing-card" style="border-color: #10b981; border-width: 2px;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-building" style="color: #10b981;"></i></div>
-            <h3 style="margin: 0;">Enterprise</h3>
-            <h2>₹4,999<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <h3 style="margin: 0; color: #1e293b; font-weight: 700;">Enterprise</h3>
+            <h2 style="color: #667eea;">₹4,999<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For organizations</p>
             <hr style="margin: 1rem 0;">
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Unlimited queries</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Priority support</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Custom integrations</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
-            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All exports</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Unlimited queries</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Priority support</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Custom integrations</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
+            <p style="color: #374151;"><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All exports</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1582,7 +1608,7 @@ def show_main_app():
     # --- SIDEBAR ---
     with st.sidebar:
         # User profile section
-        st.markdown(f'<h3><i class="fa-solid fa-user-circle" style="margin-right: 8px; color: #667eea;"></i>{user["name"]}</h3>', unsafe_allow_html=True)
+        st.markdown(f'<h3 style="color: #ffffff;"><i class="fa-solid fa-user-circle" style="margin-right: 8px; color: #667eea;"></i>{user["name"]}</h3>', unsafe_allow_html=True)
         tier_class = f"tier-{tier}"
         st.markdown(f'<span class="tier-badge {tier_class}">{tier.upper()}</span>', unsafe_allow_html=True)
         
@@ -1601,7 +1627,7 @@ def show_main_app():
         st.divider()
         
         # Navigation
-        st.markdown('<h4 style="margin-bottom: 10px;"><i class="fa-solid fa-compass" style="margin-right: 8px; color: #667eea;"></i>Navigation</h4>', unsafe_allow_html=True)
+        st.markdown('<h4 style="margin-bottom: 10px; color: #ffffff !important;"><i class="fa-solid fa-compass" style="margin-right: 8px; color: #667eea;"></i>Navigation</h4>', unsafe_allow_html=True)
         page = st.radio(
             "Go to:",
             ["Query Data", "Data Sources", "Query History", "Pricing", "Settings"],
@@ -1623,7 +1649,7 @@ def show_main_app():
             st.rerun()
     
     # --- MAIN CONTENT ---
-    st.markdown(f'<h1 class="main-header"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h1 class="main-header" style="color: #1e293b;"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>', unsafe_allow_html=True)
     
     # Route to different pages
     if page == "Pricing" or st.session_state.get("show_pricing"):
@@ -1657,7 +1683,7 @@ def show_main_app():
     st.info(f"**Active Database:** {db_name}")
     
     # Query input
-    st.markdown('<h3><i class="fa-solid fa-message" style="color: #667eea; margin-right: 10px;"></i>Ask Your Data</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #1e293b; font-weight: 600;"><i class="fa-solid fa-message" style="color: #667eea; margin-right: 10px;"></i>Ask Your Data</h3>', unsafe_allow_html=True)
     
     with st.form("query_form"):
         user_query = st.text_input(
@@ -1703,7 +1729,7 @@ def show_main_app():
     
     # Display results
     if st.session_state.sql_code:
-        st.markdown('<h3><i class="fa-solid fa-code" style="color: #667eea; margin-right: 10px;"></i>Generated SQL</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-code" style="color: #667eea; margin-right: 10px;"></i>Generated SQL</h3>', unsafe_allow_html=True)
         st.code(st.session_state.sql_code, language="sql")
     
     if st.session_state.result_df is not None:
@@ -1714,7 +1740,7 @@ def show_main_app():
             col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
             
             with col1:
-                st.markdown('<h3><i class="fa-solid fa-table" style="color: #667eea; margin-right: 10px;"></i>Results</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-table" style="color: #667eea; margin-right: 10px;"></i>Results</h3>', unsafe_allow_html=True)
             
             with col2:
                 csv_data = export_to_csv(result)
@@ -1758,7 +1784,7 @@ def show_main_app():
             
             # Visualization
             if len(result.columns) > 1:
-                st.markdown('<h3><i class="fa-solid fa-chart-column" style="color: #667eea; margin-right: 10px;"></i>Visualization</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-chart-column" style="color: #667eea; margin-right: 10px;"></i>Visualization</h3>', unsafe_allow_html=True)
                 
                 col1, col2 = st.columns([1, 3])
                 
@@ -1807,12 +1833,12 @@ def show_main_app():
 
 def show_data_sources_page():
     """Data sources management page"""
-    st.markdown('<h3><i class="fa-solid fa-folder-open" style="color: #667eea; margin-right: 10px;"></i>Data Sources</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-folder-open" style="color: #667eea; margin-right: 10px;"></i>Data Sources</h3>', unsafe_allow_html=True)
     
     tier = st.session_state.user["subscription_tier"]
     
     # File upload section
-    st.markdown('<h4><i class="fa-solid fa-cloud-arrow-up" style="color: #764ba2; margin-right: 8px;"></i>Upload New Data</h4>', unsafe_allow_html=True)
+    st.markdown('<h4 style="color: #1e293b;"><i class="fa-solid fa-cloud-arrow-up" style="color: #764ba2; margin-right: 8px;"></i>Upload New Data</h4>', unsafe_allow_html=True)
     
     # File type restrictions based on tier
     if tier == "free":
@@ -1860,7 +1886,7 @@ def show_data_sources_page():
     st.divider()
     
     # User's uploaded files
-    st.markdown('<h4><i class="fa-solid fa-hard-drive" style="color: #764ba2; margin-right: 8px;"></i>Your Data Sources</h4>', unsafe_allow_html=True)
+    st.markdown('<h4 style="color: #1e293b;"><i class="fa-solid fa-hard-drive" style="color: #764ba2; margin-right: 8px;"></i>Your Data Sources</h4>', unsafe_allow_html=True)
     
     user_files = get_user_files(st.session_state.user["id"])
     
@@ -1907,7 +1933,7 @@ def show_data_sources_page():
 
 def show_history_page():
     """Query history page"""
-    st.markdown('<h3><i class="fa-solid fa-clock-rotate-left" style="color: #667eea; margin-right: 10px;"></i>Query History</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-clock-rotate-left" style="color: #667eea; margin-right: 10px;"></i>Query History</h3>', unsafe_allow_html=True)
     
     tier = st.session_state.user["subscription_tier"]
     
@@ -1954,7 +1980,7 @@ def show_history_page():
 
 def show_settings_page():
     """Settings page"""
-    st.markdown('<h3><i class="fa-solid fa-gear" style="color: #667eea; margin-right: 10px;"></i>Settings</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #1e293b;"><i class="fa-solid fa-gear" style="color: #667eea; margin-right: 10px;"></i>Settings</h3>', unsafe_allow_html=True)
     
     user = st.session_state.user
     user_info = get_user_info(user["id"])
@@ -1965,7 +1991,7 @@ def show_settings_page():
         return
     
     # Account info
-    st.markdown('<h4><i class="fa-solid fa-user" style="color: #764ba2; margin-right: 8px;"></i>Account Information</h4>', unsafe_allow_html=True)
+    st.markdown('<h4 style="color: #1e293b;"><i class="fa-solid fa-user" style="color: #764ba2; margin-right: 8px;"></i>Account Information</h4>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         st.text_input("Name", value=user_info["name"], disabled=True)
@@ -1975,7 +2001,7 @@ def show_settings_page():
     st.divider()
     
     # Subscription info
-    st.markdown('<h4><i class="fa-solid fa-crown" style="color: #f59e0b; margin-right: 8px;"></i>Subscription</h4>', unsafe_allow_html=True)
+    st.markdown('<h4 style="color: #1e293b;"><i class="fa-solid fa-crown" style="color: #f59e0b; margin-right: 8px;"></i>Subscription</h4>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         tier_display = user_info["subscription_tier"].upper() if user_info["subscription_tier"] else "FREE"
@@ -1996,7 +2022,7 @@ def show_settings_page():
     st.divider()
     
     # Danger zone
-    st.markdown('<h4><i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; margin-right: 8px;"></i>Danger Zone</h4>', unsafe_allow_html=True)
+    st.markdown('<h4 style="color: #1e293b;"><i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; margin-right: 8px;"></i>Danger Zone</h4>', unsafe_allow_html=True)
     with st.expander("Delete Account"):
         st.warning("This action cannot be undone. All your data will be permanently deleted.")
         if st.button("Delete My Account", type="secondary"):
