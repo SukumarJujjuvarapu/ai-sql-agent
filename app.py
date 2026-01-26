@@ -41,6 +41,11 @@ APP_DB_PATH = "app_database.db"
 # Default sample database - works locally and on cloud
 DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "Chinook_Sqlite.sqlite")
 
+# Check if default database exists
+if not os.path.exists(DEFAULT_DB_PATH):
+    # Fallback for cloud deployment
+    DEFAULT_DB_PATH = "Chinook_Sqlite.sqlite"
+
 # Initialize Razorpay Client
 try:
     razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
@@ -48,7 +53,13 @@ except:
     razorpay_client = None
 
 # Initialize Groq Client
-client = Groq(api_key=GROQ_API_KEY)
+try:
+    if GROQ_API_KEY:
+        client = Groq(api_key=GROQ_API_KEY)
+    else:
+        client = None
+except Exception as e:
+    client = None
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -364,6 +375,9 @@ def run_query(sql, db_path):
 
 def get_ai_sql(user_question, db_path):
     """Generate SQL from natural language using AI"""
+    if client is None:
+        return "SELECT 'Error: AI not configured. Please add GROQ_API_KEY in secrets.' as message"
+    
     schema_context = get_db_schema(db_path)
     system_prompt = f"""
     You are an expert SQL analyst. Database Schema:
@@ -374,15 +388,18 @@ def get_ai_sql(user_question, db_path):
     Make sure the query is valid SQLite syntax.
     """
     
-    completion = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_question}
-        ],
-        model="llama-3.3-70b-versatile",
-    )
-    sql = completion.choices[0].message.content
-    return sql.replace("```sql", "").replace("```", "").strip()
+    try:
+        completion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_question}
+            ],
+            model="llama-3.3-70b-versatile",
+        )
+        sql = completion.choices[0].message.content
+        return sql.replace("```sql", "").replace("```", "").strip()
+    except Exception as e:
+        return f"SELECT 'Error: {str(e)}' as message"
 
 # ============================================================
 #                    EXPORT FUNCTIONS
