@@ -2066,7 +2066,7 @@ st.markdown(
             </a>
         </div>
         <div class="footer-bottom">
-            <p><i class="fa-solid fa-flag" style="color: #ff9933;"></i> Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> in India by <b>Sukumar Jujjuvarapu</b></p>
+            <p><i class="fa-solid fa-flag" style="color: #ff9933;"></i>Developed by <b>Sukumar Jujjuvarapu</b></p>
             <p class="footer-copyright">© 2025 AI Data Analyst Pro. All rights reserved.</p>
         </div>
     </div>
