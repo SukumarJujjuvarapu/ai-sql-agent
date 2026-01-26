@@ -787,14 +787,30 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         transition: all 0.3s ease;
         border: 1px solid #f1f5f9;
+        min-height: 180px;
     }
     .feature-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
     }
+    .feature-card h4 {
+        color: #1e293b !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        margin: 0.75rem 0 0.5rem 0 !important;
+        display: block !important;
+        visibility: visible !important;
+    }
+    .feature-card p {
+        color: #64748b !important;
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+    }
     .feature-icon {
         font-size: 2.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;
     }
     
     /* ========== INFO/SUCCESS/ERROR BOXES ========== */
@@ -929,30 +945,50 @@ st.markdown("""
             overflow-wrap: break-word !important;
         }
         
-        /* Feature cards - stack and smaller */
+        /* Feature cards - FIXED for mobile */
         .feature-card {
             padding: 1rem !important;
-            margin-bottom: 0.5rem;
-            min-height: auto !important;
+            margin-bottom: 0.75rem !important;
+            min-height: 140px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
         .feature-card h4 {
-            font-size: 0.9rem !important;
+            font-size: 0.85rem !important;
             line-height: 1.3 !important;
-            margin-bottom: 0.3rem !important;
-            word-wrap: break-word !important;
+            margin: 0.5rem 0 0.3rem 0 !important;
+            color: #1e293b !important;
+            font-weight: 600 !important;
+            display: block !important;
+            visibility: visible !important;
         }
         .feature-card p {
-            font-size: 0.75rem !important;
-            line-height: 1.4 !important;
+            font-size: 0.7rem !important;
+            line-height: 1.3 !important;
             color: #64748b !important;
-            word-wrap: break-word !important;
+            margin: 0 !important;
         }
         .feature-icon {
-            font-size: 1.5rem !important;
-            margin-bottom: 0.5rem !important;
+            margin-bottom: 0.3rem !important;
         }
         .feature-icon i {
             font-size: 1.5rem !important;
+        }
+        
+        /* Trust indicators - better mobile visibility */
+        .trust-item {
+            text-align: center;
+            padding: 0.5rem;
+        }
+        .trust-item i {
+            font-size: 1.5rem !important;
+        }
+        .trust-item p {
+            font-size: 0.75rem !important;
+            margin-top: 0.3rem !important;
+            color: #64748b !important;
         }
         
         /* Pricing cards - mobile optimized */
@@ -1324,33 +1360,33 @@ def show_auth_page():
     with col1:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-chart-pie" style="font-size: 2.5rem; color: #667eea;"></i></div>
-            <h4>Smart Charts</h4>
-            <p style="color: #64748b; font-size: 0.9rem;">Auto-generate beautiful visualizations</p>
+            <div class="feature-icon"><i class="fa-solid fa-chart-pie" style="color: #667eea;"></i></div>
+            <h4 style="color: #1e293b; font-weight: 600;">Smart Charts</h4>
+            <p>Auto-generate beautiful visualizations</p>
         </div>
         ''', unsafe_allow_html=True)
     with col2:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-comments" style="font-size: 2.5rem; color: #764ba2;"></i></div>
-            <h4>Natural Language</h4>
-            <p style="color: #64748b; font-size: 0.9rem;">Ask questions in plain English</p>
+            <div class="feature-icon"><i class="fa-solid fa-comments" style="color: #764ba2;"></i></div>
+            <h4 style="color: #1e293b; font-weight: 600;">Natural Language</h4>
+            <p>Ask questions in plain English</p>
         </div>
         ''', unsafe_allow_html=True)
     with col3:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-database" style="font-size: 2.5rem; color: #f59e0b;"></i></div>
-            <h4>Any Data Source</h4>
-            <p style="color: #64748b; font-size: 0.9rem;">CSV, Excel, or SQLite databases</p>
+            <div class="feature-icon"><i class="fa-solid fa-database" style="color: #f59e0b;"></i></div>
+            <h4 style="color: #1e293b; font-weight: 600;">Any Data Source</h4>
+            <p>CSV, Excel, or SQLite databases</p>
         </div>
         ''', unsafe_allow_html=True)
     with col4:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-file-export" style="font-size: 2.5rem; color: #10b981;"></i></div>
-            <h4>Export Anywhere</h4>
-            <p style="color: #64748b; font-size: 0.9rem;">Download as PDF, Excel, or CSV</p>
+            <div class="feature-icon"><i class="fa-solid fa-file-export" style="color: #10b981;"></i></div>
+            <h4 style="color: #1e293b; font-weight: 600;">Export Anywhere</h4>
+            <p>Download as PDF, Excel, or CSV</p>
         </div>
         ''', unsafe_allow_html=True)
     
@@ -1359,23 +1395,23 @@ def show_auth_page():
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown('''
-        <div style="text-align: center;">
-            <h3 style="margin: 0;"><i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: #667eea;"></i></h3>
-            <p style="color: #64748b; font-size: 0.9rem;">Secure & Private</p>
+        <div class="trust-item" style="text-align: center; padding: 0.5rem;">
+            <i class="fa-solid fa-shield-halved" style="font-size: 1.8rem; color: #667eea;"></i>
+            <p style="color: #475569; font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500;">Secure & Private</p>
         </div>
         ''', unsafe_allow_html=True)
     with col2:
         st.markdown('''
-        <div style="text-align: center;">
-            <h3 style="margin: 0;"><i class="fa-solid fa-bolt-lightning" style="font-size: 2rem; color: #f59e0b;"></i></h3>
-            <p style="color: #64748b; font-size: 0.9rem;">Lightning Fast</p>
+        <div class="trust-item" style="text-align: center; padding: 0.5rem;">
+            <i class="fa-solid fa-bolt-lightning" style="font-size: 1.8rem; color: #f59e0b;"></i>
+            <p style="color: #475569; font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500;">Lightning Fast</p>
         </div>
         ''', unsafe_allow_html=True)
     with col3:
         st.markdown('''
-        <div style="text-align: center;">
-            <h3 style="margin: 0;"><i class="fa-solid fa-flag" style="font-size: 2rem; color: #10b981;"></i></h3>
-            <p style="color: #64748b; font-size: 0.9rem;">Made in India</p>
+        <div class="trust-item" style="text-align: center; padding: 0.5rem;">
+            <i class="fa-solid fa-flag" style="font-size: 1.8rem; color: #10b981;"></i>
+            <p style="color: #475569; font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500;">Made in India</p>
         </div>
         ''', unsafe_allow_html=True)
 
