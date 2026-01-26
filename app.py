@@ -712,7 +712,12 @@ st.markdown("""
         letter-spacing: 0.5px;
         box-shadow: var(--shadow-sm);
     }
-    .tier-free { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); color: #475569; }
+    .tier-free { 
+        background: linear-gradient(135deg, #94a3b8, #64748b); 
+        color: #ffffff !important; 
+        border: 2px solid #475569;
+        font-weight: 700;
+    }
     .tier-starter { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; }
     .tier-pro { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
     .tier-enterprise { background: linear-gradient(135deg, #34d399, #10b981); color: white; }
@@ -896,19 +901,24 @@ st.markdown("""
         font-weight: 600 !important;
     }
     /* Sidebar Progress Bar - Force purple gradient */
-    [data-testid="stSidebar"] .stProgress > div,
-    [data-testid="stSidebar"] .stProgress > div > div,
-    [data-testid="stSidebar"] .stProgress > div > div > div,
-    [data-testid="stSidebar"] [data-testid="stProgressBar"] > div,
-    [data-testid="stSidebar"] [role="progressbar"] > div {
-        background: linear-gradient(90deg, #667eea, #764ba2) !important;
-        background-color: #667eea !important;
-    }
-    [data-testid="stSidebar"] .stProgress,
-    [data-testid="stSidebar"] [data-testid="stProgressBar"] {
-        background: rgba(255, 255, 255, 0.2) !important;
+    [data-testid="stSidebar"] .stProgress > div {
+        background: rgba(255, 255, 255, 0.15) !important;
         border-radius: 10px !important;
-        overflow: hidden;
+        overflow: hidden !important;
+    }
+    [data-testid="stSidebar"] .stProgress > div > div {
+        background: transparent !important;
+    }
+    [data-testid="stSidebar"] .stProgress > div > div > div,
+    [data-testid="stSidebar"] [data-testid="stProgressBar"] > div > div,
+    [data-testid="stSidebar"] [role="progressbar"],
+    [data-testid="stSidebar"] [role="progressbar"] > div {
+        background: linear-gradient(90deg, #667eea, #764ba2, #a855f7) !important;
+        border-radius: 10px !important;
+    }
+    /* Hide any red/default color */
+    [data-testid="stSidebar"] .stProgress [style*="background"] {
+        background: linear-gradient(90deg, #667eea, #764ba2) !important;
     }
     [data-testid="stSidebar"] .stRadio label {
         color: #ffffff !important;
