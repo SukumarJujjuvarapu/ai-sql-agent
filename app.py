@@ -598,39 +598,290 @@ if "current_question" not in st.session_state:
 
 st.markdown("""
 <style>
+    /* ========== GLOBAL STYLES ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    }
+    
+    /* Hide default Streamlit elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* ========== MAIN HEADER ========== */
     .main-header {
-        font-size: 2.5rem;
-        font-weight: 700;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Inter', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
-        padding: 1rem 0;
+        padding: 1.5rem 0;
+        letter-spacing: -1px;
+        animation: fadeInDown 0.8s ease-out;
     }
+    
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ========== GLASSMORPHISM CARDS ========== */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    }
+    
+    /* ========== TIER BADGES ========== */
     .tier-badge {
         display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
+        padding: 0.4rem 1rem;
+        border-radius: 25px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .tier-free { background: #e2e8f0; color: #475569; }
-    .tier-starter { background: #dbeafe; color: #1e40af; }
-    .tier-pro { background: #fef3c7; color: #92400e; }
-    .tier-enterprise { background: #d1fae5; color: #065f46; }
+    .tier-free { 
+        background: linear-gradient(135deg, #e2e8f0, #cbd5e1); 
+        color: #475569; 
+    }
+    .tier-starter { 
+        background: linear-gradient(135deg, #60a5fa, #3b82f6); 
+        color: white; 
+    }
+    .tier-pro { 
+        background: linear-gradient(135deg, #fbbf24, #f59e0b); 
+        color: white; 
+    }
+    .tier-enterprise { 
+        background: linear-gradient(135deg, #34d399, #10b981); 
+        color: white; 
+    }
+    
+    /* ========== PRICING CARDS ========== */
     .pricing-card {
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 2px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 2rem;
         text-align: center;
-        transition: transform 0.2s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    .pricing-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
     }
     .pricing-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
     }
+    .pricing-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    .pricing-card h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0.5rem 0;
+    }
+    
+    /* ========== BUTTONS ========== */
     .stButton>button {
         width: 100%;
+        border-radius: 12px;
+        font-weight: 600;
+        padding: 0.6rem 1.5rem;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* Primary buttons */
+    .stButton>button[kind="primary"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    /* ========== FORM INPUTS ========== */
+    .stTextInput>div>div>input {
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    .stTextInput>div>div>input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+    
+    /* ========== SIDEBAR ========== */
+    .css-1d391kg, [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    }
+    [data-testid="stSidebar"] * {
+        color: #e2e8f0 !important;
+    }
+    [data-testid="stSidebar"] .stProgress > div > div {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    
+    /* ========== DATA DISPLAY ========== */
+    .stDataFrame {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    /* ========== FEATURE CARDS ========== */
+    .feature-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        border: 1px solid #f1f5f9;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    }
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* ========== INFO/SUCCESS/ERROR BOXES ========== */
+    .stAlert {
+        border-radius: 12px;
+        border: none;
+    }
+    
+    /* ========== TABS ========== */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: rgba(255,255,255,0.5);
+        border-radius: 12px;
+        padding: 4px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 10px 20px;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white !important;
+    }
+    
+    /* ========== EXPANDERS ========== */
+    .streamlit-expanderHeader {
+        background: rgba(255,255,255,0.7);
+        border-radius: 12px;
+        font-weight: 600;
+    }
+    
+    /* ========== CODE BLOCKS ========== */
+    .stCodeBlock {
+        border-radius: 12px;
+    }
+    
+    /* ========== METRICS ========== */
+    [data-testid="stMetricValue"] {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    /* ========== ANIMATIONS ========== */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    .slide-in {
+        animation: slideIn 0.5s ease-out;
+    }
+    
+    /* ========== HERO SECTION ========== */
+    .hero-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #64748b;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+    
+    /* ========== DOWNLOAD BUTTONS ========== */
+    .stDownloadButton>button {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+    .stDownloadButton>button:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+    }
+    
+    /* ========== SELECTBOX ========== */
+    .stSelectbox>div>div {
+        border-radius: 12px;
+    }
+    
+    /* ========== PROGRESS BAR ========== */
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        border-radius: 10px;
+    }
+    
+    /* ========== FILE UPLOADER ========== */
+    .stFileUploader {
+        border: 2px dashed #667eea;
+        border-radius: 16px;
+        padding: 1rem;
+        background: rgba(102, 126, 234, 0.05);
+    }
+    
+    /* ========== DIVIDER ========== */
+    hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        margin: 2rem 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -641,8 +892,14 @@ st.markdown("""
 
 def show_auth_page():
     """Display login/register page"""
-    st.markdown('<h1 class="main-header">🤖 AI Data Analyst Pro</h1>', unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #666;'>Transform your data into insights with natural language</p>", unsafe_allow_html=True)
+    # Hero Section
+    st.markdown('''
+    <div style="text-align: center; padding: 2rem 0;">
+        <h1 class="main-header">🤖 AI Data Analyst Pro</h1>
+        <p class="hero-subtitle">Transform your data into powerful insights using natural language.<br>
+        <span style="color: #667eea; font-weight: 600;">No SQL knowledge required.</span></p>
+    </div>
+    ''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 2, 1])
     
@@ -650,11 +907,11 @@ def show_auth_page():
         tab1, tab2 = st.tabs(["🔐 Login", "📝 Register"])
         
         with tab1:
-            st.subheader("Welcome Back!")
+            st.markdown("#### 👋 Welcome Back!")
             with st.form("login_form"):
-                email = st.text_input("Email", placeholder="you@example.com")
-                password = st.text_input("Password", type="password", placeholder="••••••••")
-                submitted = st.form_submit_button("Login", use_container_width=True)
+                email = st.text_input("📧 Email", placeholder="you@example.com")
+                password = st.text_input("🔒 Password", type="password", placeholder="••••••••")
+                submitted = st.form_submit_button("🚀 Login", use_container_width=True)
                 
                 if submitted:
                     if email and password:
@@ -662,54 +919,106 @@ def show_auth_page():
                         if user:
                             st.session_state.authenticated = True
                             st.session_state.user = user
-                            st.success("Login successful!")
+                            st.success("✅ Login successful!")
+                            st.balloons()
                             st.rerun()
                         else:
-                            st.error("Invalid email or password")
+                            st.error("❌ Invalid email or password")
                     else:
-                        st.warning("Please fill in all fields")
+                        st.warning("⚠️ Please fill in all fields")
         
         with tab2:
-            st.subheader("Create Account")
+            st.markdown("#### ✨ Create Your Account")
             with st.form("register_form"):
-                name = st.text_input("Full Name", placeholder="John Doe")
-                email = st.text_input("Email", placeholder="you@example.com", key="reg_email")
-                password = st.text_input("Password", type="password", placeholder="••••••••", key="reg_pass")
-                password2 = st.text_input("Confirm Password", type="password", placeholder="••••••••")
-                submitted = st.form_submit_button("Create Account", use_container_width=True)
+                name = st.text_input("👤 Full Name", placeholder="John Doe")
+                email = st.text_input("📧 Email", placeholder="you@example.com", key="reg_email")
+                password = st.text_input("🔒 Password", type="password", placeholder="••••••••", key="reg_pass")
+                password2 = st.text_input("🔒 Confirm Password", type="password", placeholder="••••••••")
+                submitted = st.form_submit_button("🎉 Create Account", use_container_width=True)
                 
                 if submitted:
                     if name and email and password and password2:
                         if password != password2:
-                            st.error("Passwords do not match")
+                            st.error("❌ Passwords do not match")
                         elif len(password) < 6:
-                            st.error("Password must be at least 6 characters")
+                            st.error("❌ Password must be at least 6 characters")
                         else:
                             success, result = create_user(email, password, name)
                             if success:
-                                st.success("Account created! Please login.")
+                                st.success("🎉 Account created! Please login.")
+                                st.balloons()
                             else:
-                                st.error(result)
+                                st.error(f"❌ {result}")
                     else:
-                        st.warning("Please fill in all fields")
+                        st.warning("⚠️ Please fill in all fields")
     
-    # Features showcase
+    # Features showcase with beautiful cards
     st.markdown("---")
-    st.markdown("### ✨ Features")
+    st.markdown('''
+    <div style="text-align: center; margin: 2rem 0;">
+        <h2 style="color: #1e293b;">✨ Powerful Features</h2>
+        <p style="color: #64748b;">Everything you need to analyze data like a pro</p>
+    </div>
+    ''', unsafe_allow_html=True)
     
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown("#### 📊 Smart Charts")
-        st.write("Auto-generate visualizations from your data")
+        st.markdown('''
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h4>Smart Charts</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Auto-generate beautiful visualizations</p>
+        </div>
+        ''', unsafe_allow_html=True)
     with col2:
-        st.markdown("#### 🗣️ Natural Language")
-        st.write("Ask questions in plain English")
+        st.markdown('''
+        <div class="feature-card">
+            <div class="feature-icon">🗣️</div>
+            <h4>Natural Language</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Ask questions in plain English</p>
+        </div>
+        ''', unsafe_allow_html=True)
     with col3:
-        st.markdown("#### 📁 Any Data Source")
-        st.write("CSV, Excel, or SQLite databases")
+        st.markdown('''
+        <div class="feature-card">
+            <div class="feature-icon">📁</div>
+            <h4>Any Data Source</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">CSV, Excel, or SQLite databases</p>
+        </div>
+        ''', unsafe_allow_html=True)
     with col4:
-        st.markdown("#### 📥 Export Anywhere")
-        st.write("Download as PDF, Excel, or CSV")
+        st.markdown('''
+        <div class="feature-card">
+            <div class="feature-icon">📥</div>
+            <h4>Export Anywhere</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Download as PDF, Excel, or CSV</p>
+        </div>
+        ''', unsafe_allow_html=True)
+    
+    # Trust indicators
+    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown('''
+        <div style="text-align: center;">
+            <h3 style="color: #667eea; margin: 0;">🔒</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Secure & Private</p>
+        </div>
+        ''', unsafe_allow_html=True)
+    with col2:
+        st.markdown('''
+        <div style="text-align: center;">
+            <h3 style="color: #667eea; margin: 0;">⚡</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Lightning Fast</p>
+        </div>
+        ''', unsafe_allow_html=True)
+    with col3:
+        st.markdown('''
+        <div style="text-align: center;">
+            <h3 style="color: #667eea; margin: 0;">🇮🇳</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Made in India</p>
+        </div>
+        ''', unsafe_allow_html=True)
 
 # ============================================================
 #                    PRICING PAGE
@@ -717,47 +1026,54 @@ def show_auth_page():
 
 def show_pricing_page():
     """Display pricing page"""
-    st.markdown("## 💎 Upgrade Your Plan")
-    st.markdown("Choose the perfect plan for your data analysis needs")
+    st.markdown('''
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">💎 Choose Your Plan</h1>
+        <p style="color: #64748b; font-size: 1.1rem;">Unlock the full power of AI data analysis</p>
+    </div>
+    ''', unsafe_allow_html=True)
     
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown("""
         <div class="pricing-card">
-            <h3>🆓 Free</h3>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🆓</div>
+            <h3 style="margin: 0;">Free</h3>
             <h2>₹0</h2>
-            <p>Forever free</p>
-            <hr>
+            <p style="color: #64748b;">Forever free</p>
+            <hr style="margin: 1rem 0;">
             <p>✅ 5 queries/day</p>
             <p>✅ Basic charts</p>
             <p>✅ CSV upload</p>
-            <p>❌ Query history</p>
-            <p>❌ PDF export</p>
+            <p style="color: #94a3b8;">❌ Query history</p>
+            <p style="color: #94a3b8;">❌ PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         if st.session_state.user["subscription_tier"] == "free":
-            st.button("Current Plan", disabled=True, key="free_btn")
+            st.button("✓ Current Plan", disabled=True, key="free_btn")
     
     with col2:
         st.markdown("""
-        <div class="pricing-card" style="border-color: #3b82f6;">
-            <h3>🚀 Starter</h3>
-            <h2>₹499/mo</h2>
-            <p>For individuals</p>
-            <hr>
+        <div class="pricing-card" style="border-color: #3b82f6; border-width: 2px;">
+            <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">POPULAR</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+            <h3 style="margin: 0;">Starter</h3>
+            <h2>₹499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <p style="color: #64748b;">For individuals</p>
+            <hr style="margin: 1rem 0;">
             <p>✅ 50 queries/day</p>
             <p>✅ All chart types</p>
             <p>✅ Excel upload</p>
             <p>✅ Query history</p>
-            <p>❌ PDF export</p>
+            <p style="color: #94a3b8;">❌ PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "starter":
-            st.button("✅ Current Plan", disabled=True, key="starter_current")
+            st.button("✓ Current Plan", disabled=True, key="starter_current")
         else:
-            if st.button("🚀 Upgrade to Starter - ₹499", key="starter_btn", use_container_width=True):
+            if st.button("🚀 Upgrade to Starter", key="starter_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "starter", 30)
                 st.session_state.user["subscription_tier"] = "starter"
                 st.success("🎉 Upgraded to Starter! (Demo Mode)")
@@ -766,11 +1082,13 @@ def show_pricing_page():
     
     with col3:
         st.markdown("""
-        <div class="pricing-card" style="border-color: #f59e0b;">
-            <h3>⭐ Pro</h3>
-            <h2>₹1,499/mo</h2>
-            <p>For teams</p>
-            <hr>
+        <div class="pricing-card" style="border-color: #f59e0b; border-width: 2px;">
+            <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">BEST VALUE</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
+            <h3 style="margin: 0;">Pro</h3>
+            <h2>₹1,499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <p style="color: #64748b;">For teams</p>
+            <hr style="margin: 1rem 0;">
             <p>✅ 500 queries/day</p>
             <p>✅ All chart types</p>
             <p>✅ All file types</p>
@@ -780,9 +1098,9 @@ def show_pricing_page():
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "pro":
-            st.button("✅ Current Plan", disabled=True, key="pro_current")
+            st.button("✓ Current Plan", disabled=True, key="pro_current")
         else:
-            if st.button("⭐ Upgrade to Pro - ₹1,499", key="pro_btn", use_container_width=True):
+            if st.button("⭐ Upgrade to Pro", key="pro_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "pro", 30)
                 st.session_state.user["subscription_tier"] = "pro"
                 st.success("🎉 Upgraded to Pro! (Demo Mode)")
@@ -791,11 +1109,12 @@ def show_pricing_page():
     
     with col4:
         st.markdown("""
-        <div class="pricing-card" style="border-color: #10b981;">
-            <h3>🏢 Enterprise</h3>
-            <h2>₹4,999/mo</h2>
-            <p>For organizations</p>
-            <hr>
+        <div class="pricing-card" style="border-color: #10b981; border-width: 2px;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏢</div>
+            <h3 style="margin: 0;">Enterprise</h3>
+            <h2>₹4,999<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
+            <p style="color: #64748b;">For organizations</p>
+            <hr style="margin: 1rem 0;">
             <p>✅ Unlimited queries</p>
             <p>✅ Priority support</p>
             <p>✅ Custom integrations</p>
@@ -805,9 +1124,9 @@ def show_pricing_page():
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "enterprise":
-            st.button("✅ Current Plan", disabled=True, key="enterprise_current")
+            st.button("✓ Current Plan", disabled=True, key="enterprise_current")
         else:
-            if st.button("🏢 Upgrade to Enterprise - ₹4,999", key="enterprise_btn", use_container_width=True):
+            if st.button("🏢 Upgrade to Enterprise", key="enterprise_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "enterprise", 30)
                 st.session_state.user["subscription_tier"] = "enterprise"
                 st.success("🎉 Upgraded to Enterprise! (Demo Mode)")
@@ -1260,16 +1579,110 @@ else:
     show_auth_page()
 
 # --- FOOTER ---
-st.markdown("---")
 st.markdown(
     """
-    <div style="text-align: center; color: grey; padding: 10px;">
-        <p>🇮🇳 Made in India by <b>Sukumar Jujjuvarapu</b></p>
-        <a href="https://www.linkedin.com/in/sukumar-jujjuvarapu/" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/SukumarJujjuvarapu" target="_blank">GitHub</a> |
-        <a href="https://sukumarjujjuvarapu.github.io/" target="_blank">Portfolio</a>
-        <p style="font-size: 0.8em; margin-top: 10px;">© 2026 AI Data Analyst Pro. All rights reserved.</p>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="footer-logo">📊</span>
+            <span class="footer-title">AI Data Analyst Pro</span>
+        </div>
+        <p class="footer-tagline">Transform your data into insights with the power of AI</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/sukumar-jujjuvarapu/" target="_blank" class="footer-link">
+                <span>💼</span> LinkedIn
+            </a>
+            <span class="footer-divider">•</span>
+            <a href="https://github.com/SukumarJujjuvarapu" target="_blank" class="footer-link">
+                <span>🐙</span> GitHub
+            </a>
+            <span class="footer-divider">•</span>
+            <a href="https://sukumarjujjuvarapu.github.io/" target="_blank" class="footer-link">
+                <span>🌐</span> Portfolio
+            </a>
+        </div>
+        <div class="footer-bottom">
+            <p>🇮🇳 Made with ❤️ in India by <b>Sukumar Jujjuvarapu</b></p>
+            <p class="footer-copyright">© 2025 AI Data Analyst Pro. All rights reserved.</p>
+        </div>
     </div>
+    <style>
+    .footer-container {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        border-radius: 20px;
+        padding: 40px 30px;
+        margin-top: 50px;
+        text-align: center;
+        box-shadow: 0 -10px 40px rgba(102, 126, 234, 0.15);
+    }
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .footer-logo {
+        font-size: 2rem;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    .footer-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .footer-tagline {
+        color: #a0a0a0;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    .footer-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+    .footer-link {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: rgba(102, 126, 234, 0.2);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .footer-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+    .footer-divider {
+        color: #4a4a6a;
+    }
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-top: 10px;
+    }
+    .footer-bottom p {
+        color: #b0b0b0;
+        margin: 5px 0;
+    }
+    .footer-copyright {
+        font-size: 0.8rem;
+        color: #707090 !important;
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
