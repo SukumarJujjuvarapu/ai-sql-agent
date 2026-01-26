@@ -597,9 +597,23 @@ if "current_question" not in st.session_state:
 # ============================================================
 
 st.markdown("""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     /* ========== GLOBAL STYLES ========== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Font Awesome icon styling */
+    .fa-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
     
     .stApp {
         background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
@@ -883,7 +897,7 @@ st.markdown("""
         background: linear-gradient(90deg, transparent, #667eea, transparent);
         margin: 2rem 0;
     }
-</style>
+</link>
 """, unsafe_allow_html=True)
 
 # ============================================================
@@ -895,7 +909,7 @@ def show_auth_page():
     # Hero Section
     st.markdown('''
     <div style="text-align: center; padding: 2rem 0;">
-        <h1 class="main-header">🤖 AI Data Analyst Pro</h1>
+        <h1 class="main-header"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>
         <p class="hero-subtitle">Transform your data into powerful insights using natural language.<br>
         <span style="color: #667eea; font-weight: 600;">No SQL knowledge required.</span></p>
     </div>
@@ -904,14 +918,14 @@ def show_auth_page():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        tab1, tab2 = st.tabs(["🔐 Login", "📝 Register"])
+        tab1, tab2 = st.tabs(["Login", "Register"])
         
         with tab1:
-            st.markdown("#### 👋 Welcome Back!")
+            st.markdown('<h4><i class="fa-solid fa-hand-wave" style="color: #667eea; margin-right: 8px;"></i>Welcome Back!</h4>', unsafe_allow_html=True)
             with st.form("login_form"):
-                email = st.text_input("📧 Email", placeholder="you@example.com")
-                password = st.text_input("🔒 Password", type="password", placeholder="••••••••")
-                submitted = st.form_submit_button("🚀 Login", use_container_width=True)
+                email = st.text_input("Email", placeholder="you@example.com")
+                password = st.text_input("Password", type="password", placeholder="••••••••")
+                submitted = st.form_submit_button("Login", use_container_width=True)
                 
                 if submitted:
                     if email and password:
@@ -928,13 +942,13 @@ def show_auth_page():
                         st.warning("⚠️ Please fill in all fields")
         
         with tab2:
-            st.markdown("#### ✨ Create Your Account")
+            st.markdown('<h4><i class="fa-solid fa-sparkles" style="color: #667eea; margin-right: 8px;"></i>Create Your Account</h4>', unsafe_allow_html=True)
             with st.form("register_form"):
-                name = st.text_input("👤 Full Name", placeholder="John Doe")
-                email = st.text_input("📧 Email", placeholder="you@example.com", key="reg_email")
-                password = st.text_input("🔒 Password", type="password", placeholder="••••••••", key="reg_pass")
-                password2 = st.text_input("🔒 Confirm Password", type="password", placeholder="••••••••")
-                submitted = st.form_submit_button("🎉 Create Account", use_container_width=True)
+                name = st.text_input("Full Name", placeholder="John Doe")
+                email = st.text_input("Email", placeholder="you@example.com", key="reg_email")
+                password = st.text_input("Password", type="password", placeholder="••••••••", key="reg_pass")
+                password2 = st.text_input("Confirm Password", type="password", placeholder="••••••••")
+                submitted = st.form_submit_button("Create Account", use_container_width=True)
                 
                 if submitted:
                     if name and email and password and password2:
@@ -956,7 +970,7 @@ def show_auth_page():
     st.markdown("---")
     st.markdown('''
     <div style="text-align: center; margin: 2rem 0;">
-        <h2 style="color: #1e293b;">✨ Powerful Features</h2>
+        <h2 style="color: #1e293b;"><i class="fa-solid fa-bolt" style="color: #667eea; margin-right: 10px;"></i>Powerful Features</h2>
         <p style="color: #64748b;">Everything you need to analyze data like a pro</p>
     </div>
     ''', unsafe_allow_html=True)
@@ -965,7 +979,7 @@ def show_auth_page():
     with col1:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon">📊</div>
+            <div class="feature-icon"><i class="fa-solid fa-chart-pie" style="font-size: 2.5rem; color: #667eea;"></i></div>
             <h4>Smart Charts</h4>
             <p style="color: #64748b; font-size: 0.9rem;">Auto-generate beautiful visualizations</p>
         </div>
@@ -973,7 +987,7 @@ def show_auth_page():
     with col2:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon">🗣️</div>
+            <div class="feature-icon"><i class="fa-solid fa-comments" style="font-size: 2.5rem; color: #764ba2;"></i></div>
             <h4>Natural Language</h4>
             <p style="color: #64748b; font-size: 0.9rem;">Ask questions in plain English</p>
         </div>
@@ -981,7 +995,7 @@ def show_auth_page():
     with col3:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon">📁</div>
+            <div class="feature-icon"><i class="fa-solid fa-database" style="font-size: 2.5rem; color: #f59e0b;"></i></div>
             <h4>Any Data Source</h4>
             <p style="color: #64748b; font-size: 0.9rem;">CSV, Excel, or SQLite databases</p>
         </div>
@@ -989,7 +1003,7 @@ def show_auth_page():
     with col4:
         st.markdown('''
         <div class="feature-card">
-            <div class="feature-icon">📥</div>
+            <div class="feature-icon"><i class="fa-solid fa-file-export" style="font-size: 2.5rem; color: #10b981;"></i></div>
             <h4>Export Anywhere</h4>
             <p style="color: #64748b; font-size: 0.9rem;">Download as PDF, Excel, or CSV</p>
         </div>
@@ -1001,21 +1015,21 @@ def show_auth_page():
     with col1:
         st.markdown('''
         <div style="text-align: center;">
-            <h3 style="color: #667eea; margin: 0;">🔒</h3>
+            <h3 style="margin: 0;"><i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: #667eea;"></i></h3>
             <p style="color: #64748b; font-size: 0.9rem;">Secure & Private</p>
         </div>
         ''', unsafe_allow_html=True)
     with col2:
         st.markdown('''
         <div style="text-align: center;">
-            <h3 style="color: #667eea; margin: 0;">⚡</h3>
+            <h3 style="margin: 0;"><i class="fa-solid fa-bolt-lightning" style="font-size: 2rem; color: #f59e0b;"></i></h3>
             <p style="color: #64748b; font-size: 0.9rem;">Lightning Fast</p>
         </div>
         ''', unsafe_allow_html=True)
     with col3:
         st.markdown('''
         <div style="text-align: center;">
-            <h3 style="color: #667eea; margin: 0;">🇮🇳</h3>
+            <h3 style="margin: 0;"><i class="fa-solid fa-flag" style="font-size: 2rem; color: #10b981;"></i></h3>
             <p style="color: #64748b; font-size: 0.9rem;">Made in India</p>
         </div>
         ''', unsafe_allow_html=True)
@@ -1028,7 +1042,7 @@ def show_pricing_page():
     """Display pricing page"""
     st.markdown('''
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">💎 Choose Your Plan</h1>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-gem" style="color: #667eea; margin-right: 12px;"></i>Choose Your Plan</h1>
         <p style="color: #64748b; font-size: 1.1rem;">Unlock the full power of AI data analysis</p>
     </div>
     ''', unsafe_allow_html=True)
@@ -1038,45 +1052,45 @@ def show_pricing_page():
     with col1:
         st.markdown("""
         <div class="pricing-card">
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🆓</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-gift" style="color: #64748b;"></i></div>
             <h3 style="margin: 0;">Free</h3>
             <h2>₹0</h2>
             <p style="color: #64748b;">Forever free</p>
             <hr style="margin: 1rem 0;">
-            <p>✅ 5 queries/day</p>
-            <p>✅ Basic charts</p>
-            <p>✅ CSV upload</p>
-            <p style="color: #94a3b8;">❌ Query history</p>
-            <p style="color: #94a3b8;">❌ PDF export</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>5 queries/day</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Basic charts</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>CSV upload</p>
+            <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>Query history</p>
+            <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         if st.session_state.user["subscription_tier"] == "free":
-            st.button("✓ Current Plan", disabled=True, key="free_btn")
+            st.button("Current Plan", disabled=True, key="free_btn")
     
     with col2:
         st.markdown("""
         <div class="pricing-card" style="border-color: #3b82f6; border-width: 2px;">
             <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">POPULAR</div>
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-rocket" style="color: #3b82f6;"></i></div>
             <h3 style="margin: 0;">Starter</h3>
             <h2>₹499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For individuals</p>
             <hr style="margin: 1rem 0;">
-            <p>✅ 50 queries/day</p>
-            <p>✅ All chart types</p>
-            <p>✅ Excel upload</p>
-            <p>✅ Query history</p>
-            <p style="color: #94a3b8;">❌ PDF export</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>50 queries/day</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Excel upload</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Query history</p>
+            <p style="color: #94a3b8;"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i>PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "starter":
-            st.button("✓ Current Plan", disabled=True, key="starter_current")
+            st.button("Current Plan", disabled=True, key="starter_current")
         else:
-            if st.button("🚀 Upgrade to Starter", key="starter_btn", use_container_width=True):
+            if st.button("Upgrade to Starter", key="starter_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "starter", 30)
                 st.session_state.user["subscription_tier"] = "starter"
-                st.success("🎉 Upgraded to Starter! (Demo Mode)")
+                st.success("Upgraded to Starter! (Demo Mode)")
                 st.balloons()
                 st.rerun()
     
@@ -1084,58 +1098,58 @@ def show_pricing_page():
         st.markdown("""
         <div class="pricing-card" style="border-color: #f59e0b; border-width: 2px;">
             <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; display: inline-block; margin-bottom: 0.5rem;">BEST VALUE</div>
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-star" style="color: #f59e0b;"></i></div>
             <h3 style="margin: 0;">Pro</h3>
             <h2>₹1,499<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For teams</p>
             <hr style="margin: 1rem 0;">
-            <p>✅ 500 queries/day</p>
-            <p>✅ All chart types</p>
-            <p>✅ All file types</p>
-            <p>✅ Full history</p>
-            <p>✅ PDF export</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>500 queries/day</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All chart types</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All file types</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>PDF export</p>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "pro":
-            st.button("✓ Current Plan", disabled=True, key="pro_current")
+            st.button("Current Plan", disabled=True, key="pro_current")
         else:
-            if st.button("⭐ Upgrade to Pro", key="pro_btn", use_container_width=True):
+            if st.button("Upgrade to Pro", key="pro_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "pro", 30)
                 st.session_state.user["subscription_tier"] = "pro"
-                st.success("🎉 Upgraded to Pro! (Demo Mode)")
+                st.success("Upgraded to Pro! (Demo Mode)")
                 st.balloons()
                 st.rerun()
     
     with col4:
         st.markdown("""
         <div class="pricing-card" style="border-color: #10b981; border-width: 2px;">
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏢</div>
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-building" style="color: #10b981;"></i></div>
             <h3 style="margin: 0;">Enterprise</h3>
             <h2>₹4,999<span style="font-size: 1rem; color: #64748b;">/mo</span></h2>
             <p style="color: #64748b;">For organizations</p>
             <hr style="margin: 1rem 0;">
-            <p>✅ Unlimited queries</p>
-            <p>✅ Priority support</p>
-            <p>✅ Custom integrations</p>
-            <p>✅ Full history</p>
-            <p>✅ All exports</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Unlimited queries</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Priority support</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Custom integrations</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>Full history</p>
+            <p><i class="fa-solid fa-check" style="color: #10b981; margin-right: 8px;"></i>All exports</p>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.user["subscription_tier"] == "enterprise":
-            st.button("✓ Current Plan", disabled=True, key="enterprise_current")
+            st.button("Current Plan", disabled=True, key="enterprise_current")
         else:
-            if st.button("🏢 Upgrade to Enterprise", key="enterprise_btn", use_container_width=True):
+            if st.button("Upgrade to Enterprise", key="enterprise_btn", use_container_width=True):
                 upgrade_user_subscription(st.session_state.user["id"], "enterprise", 30)
                 st.session_state.user["subscription_tier"] = "enterprise"
-                st.success("🎉 Upgraded to Enterprise! (Demo Mode)")
+                st.success("Upgraded to Enterprise! (Demo Mode)")
                 st.balloons()
                 st.rerun()
     
     # Payment Notice
     st.divider()
-    st.info("💡 **Demo Mode:** Upgrades are instant for testing. Real payments via Razorpay coming soon!")
+    st.info("**Demo Mode:** Upgrades are instant for testing. Real payments via Razorpay coming soon!")
 
 # ============================================================
 #                    MAIN APPLICATION
@@ -1149,7 +1163,7 @@ def show_main_app():
     # --- SIDEBAR ---
     with st.sidebar:
         # User profile section
-        st.markdown(f"### 👤 {user['name']}")
+        st.markdown(f'<h3><i class="fa-solid fa-user-circle" style="margin-right: 8px; color: #667eea;"></i>{user["name"]}</h3>', unsafe_allow_html=True)
         tier_class = f"tier-{tier}"
         st.markdown(f'<span class="tier-badge {tier_class}">{tier.upper()}</span>', unsafe_allow_html=True)
         
@@ -1163,15 +1177,15 @@ def show_main_app():
             remaining = limits.get(tier, 5)
         remaining = max(0, remaining)  # Ensure non-negative
         st.progress(min(1.0, remaining / limits.get(tier, 5)))
-        st.caption(f"🔥 {remaining} queries remaining today")
+        st.caption(f"{remaining} queries remaining today")
         
         st.divider()
         
         # Navigation
-        st.markdown("### 📍 Navigation")
+        st.markdown('<h4 style="margin-bottom: 10px;"><i class="fa-solid fa-compass" style="margin-right: 8px; color: #667eea;"></i>Navigation</h4>', unsafe_allow_html=True)
         page = st.radio(
             "Go to:",
-            ["🔍 Query Data", "📁 Data Sources", "📜 Query History", "💎 Pricing", "⚙️ Settings"],
+            ["Query Data", "Data Sources", "Query History", "Pricing", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -1179,34 +1193,34 @@ def show_main_app():
         
         # Quick upgrade button for free users
         if tier == "free":
-            if st.button("⚡ Upgrade Now", use_container_width=True):
+            if st.button("Upgrade Now", use_container_width=True):
                 st.session_state.show_pricing = True
                 st.rerun()
         
         # Logout button
-        if st.button("🚪 Logout", use_container_width=True):
+        if st.button("Logout", use_container_width=True):
             st.session_state.authenticated = False
             st.session_state.user = None
             st.rerun()
     
     # --- MAIN CONTENT ---
-    st.markdown(f'<h1 class="main-header">🤖 AI Data Analyst Pro</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h1 class="main-header"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>', unsafe_allow_html=True)
     
     # Route to different pages
-    if page == "💎 Pricing" or st.session_state.get("show_pricing"):
+    if page == "Pricing" or st.session_state.get("show_pricing"):
         st.session_state.show_pricing = False
         show_pricing_page()
         return
     
-    elif page == "📁 Data Sources":
+    elif page == "Data Sources":
         show_data_sources_page()
         return
     
-    elif page == "📜 Query History":
+    elif page == "Query History":
         show_history_page()
         return
     
-    elif page == "⚙️ Settings":
+    elif page == "Settings":
         show_settings_page()
         return
     
@@ -1217,14 +1231,14 @@ def show_main_app():
     
     # Check if database exists
     if st.session_state.current_db and not os.path.exists(st.session_state.current_db):
-        st.warning(f"⚠️ Database file not found. Switching to default sample database.")
+        st.warning(f"Database file not found. Switching to default sample database.")
         st.session_state.current_db = DEFAULT_DB_PATH
         db_name = os.path.basename(DEFAULT_DB_PATH)
     
-    st.info(f"📊 **Active Database:** {db_name}")
+    st.info(f"**Active Database:** {db_name}")
     
     # Query input
-    st.markdown("### 💬 Ask Your Data")
+    st.markdown('<h3><i class="fa-solid fa-message" style="color: #667eea; margin-right: 10px;"></i>Ask Your Data</h3>', unsafe_allow_html=True)
     
     with st.form("query_form"):
         user_query = st.text_input(
@@ -1234,9 +1248,9 @@ def show_main_app():
         
         col1, col2 = st.columns([3, 1])
         with col1:
-            submitted = st.form_submit_button("🚀 Run Analysis", use_container_width=True)
+            submitted = st.form_submit_button("Run Analysis", use_container_width=True)
         with col2:
-            show_sql = st.form_submit_button("📝 Show SQL Only")
+            show_sql = st.form_submit_button("Show SQL Only")
     
     # Process query
     if submitted or show_sql:
@@ -1245,11 +1259,11 @@ def show_main_app():
             can_query, remaining = check_query_limit(user["id"], tier)
             
             if not can_query:
-                st.error(f"❌ Daily query limit reached! Upgrade your plan for more queries.")
+                st.error(f"Daily query limit reached! Upgrade your plan for more queries.")
                 if tier == "free":
-                    st.info("💡 Upgrade to Starter for 50 queries/day")
+                    st.info("Upgrade to Starter for 50 queries/day")
             else:
-                with st.spinner("🤖 AI is analyzing your question..."):
+                with st.spinner("AI is analyzing your question..."):
                     sql_code = get_ai_sql(user_query, st.session_state.current_db)
                     st.session_state.sql_code = sql_code
                     st.session_state.current_question = user_query
@@ -1266,11 +1280,11 @@ def show_main_app():
                             result_preview = result.head(10).to_string() if isinstance(result, pd.DataFrame) else str(result)
                             save_query_history(user["id"], user_query, sql_code, result_preview)
         else:
-            st.warning("⚠️ Please enter a question first!")
+            st.warning("Please enter a question first!")
     
     # Display results
     if st.session_state.sql_code:
-        st.markdown("### 📜 Generated SQL")
+        st.markdown('<h3><i class="fa-solid fa-code" style="color: #667eea; margin-right: 10px;"></i>Generated SQL</h3>', unsafe_allow_html=True)
         st.code(st.session_state.sql_code, language="sql")
     
     if st.session_state.result_df is not None:
@@ -1281,12 +1295,12 @@ def show_main_app():
             col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
             
             with col1:
-                st.markdown("### 📋 Results")
+                st.markdown('<h3><i class="fa-solid fa-table" style="color: #667eea; margin-right: 10px;"></i>Results</h3>', unsafe_allow_html=True)
             
             with col2:
                 csv_data = export_to_csv(result)
                 st.download_button(
-                    "📥 CSV",
+                    "CSV",
                     csv_data,
                     file_name="results.csv",
                     mime="text/csv",
@@ -1296,7 +1310,7 @@ def show_main_app():
             with col3:
                 excel_data = export_to_excel(result)
                 st.download_button(
-                    "📥 Excel",
+                    "Excel",
                     excel_data,
                     file_name="results.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -1308,16 +1322,16 @@ def show_main_app():
                     pdf_data = generate_pdf_report(result, st.session_state.current_question or "Query", st.session_state.sql_code)
                     if pdf_data:
                         st.download_button(
-                            "📥 PDF",
+                            "PDF",
                             pdf_data,
                             file_name="report.pdf",
                             mime="application/pdf",
                             use_container_width=True
                         )
                     else:
-                        st.button("📥 PDF", disabled=True, help="Install reportlab for PDF export")
+                        st.button("PDF", disabled=True, help="Install reportlab for PDF export")
                 else:
-                    st.button("📥 PDF", disabled=True, help="Upgrade to Pro for PDF export")
+                    st.button("PDF", disabled=True, help="Upgrade to Pro for PDF export")
             
             # Data table
             st.dataframe(result, use_container_width=True)
@@ -1325,7 +1339,7 @@ def show_main_app():
             
             # Visualization
             if len(result.columns) > 1:
-                st.markdown("### 📊 Visualization")
+                st.markdown('<h3><i class="fa-solid fa-chart-column" style="color: #667eea; margin-right: 10px;"></i>Visualization</h3>', unsafe_allow_html=True)
                 
                 col1, col2 = st.columns([1, 3])
                 
@@ -1374,23 +1388,23 @@ def show_main_app():
 
 def show_data_sources_page():
     """Data sources management page"""
-    st.markdown("### 📁 Data Sources")
+    st.markdown('<h3><i class="fa-solid fa-folder-open" style="color: #667eea; margin-right: 10px;"></i>Data Sources</h3>', unsafe_allow_html=True)
     
     tier = st.session_state.user["subscription_tier"]
     
     # File upload section
-    st.markdown("#### 📤 Upload New Data")
+    st.markdown('<h4><i class="fa-solid fa-cloud-arrow-up" style="color: #764ba2; margin-right: 8px;"></i>Upload New Data</h4>', unsafe_allow_html=True)
     
     # File type restrictions based on tier
     if tier == "free":
         allowed_types = ["csv"]
-        st.caption("🆓 Free tier: CSV files only. Upgrade for Excel & SQLite support.")
+        st.caption("Free tier: CSV files only. Upgrade for Excel & SQLite support.")
     elif tier == "starter":
         allowed_types = ["csv", "xlsx", "xls"]
-        st.caption("🚀 Starter tier: CSV and Excel files")
+        st.caption("Starter tier: CSV and Excel files")
     else:
         allowed_types = ["csv", "xlsx", "xls", "sqlite", "db"]
-        st.caption("⭐ Pro/Enterprise: All file types supported")
+        st.caption("Pro/Enterprise: All file types supported")
     
     uploaded_file = st.file_uploader(
         "Choose a file",
@@ -1401,7 +1415,7 @@ def show_data_sources_page():
     if uploaded_file:
         file_ext = uploaded_file.name.split('.')[-1].lower()
         
-        if st.button("📥 Process File", use_container_width=True):
+        if st.button("Process File", use_container_width=True):
             with st.spinner("Processing file..."):
                 try:
                     user_id = st.session_state.user["id"]
@@ -1419,7 +1433,7 @@ def show_data_sources_page():
                     elif file_ext in ["sqlite", "db"]:
                         st.session_state.current_db = file_path
                     
-                    st.success(f"✅ File processed! Now using: {uploaded_file.name}")
+                    st.success(f"File processed! Now using: {uploaded_file.name}")
                     st.rerun()
                 except Exception as e:
                     st.error(f"Error processing file: {e}")
@@ -1427,14 +1441,14 @@ def show_data_sources_page():
     st.divider()
     
     # User's uploaded files
-    st.markdown("#### 📂 Your Data Sources")
+    st.markdown('<h4><i class="fa-solid fa-hard-drive" style="color: #764ba2; margin-right: 8px;"></i>Your Data Sources</h4>', unsafe_allow_html=True)
     
     user_files = get_user_files(st.session_state.user["id"])
     
     # Default database option
     col1, col2, col3 = st.columns([3, 1, 1])
     with col1:
-        st.write("📊 **Chinook Sample Database** (Default)")
+        st.markdown('<p><i class="fa-solid fa-database" style="color: #667eea; margin-right: 8px;"></i><b>Chinook Sample Database</b> (Default)</p>', unsafe_allow_html=True)
     with col2:
         if st.button("Use", key="use_default"):
             st.session_state.current_db = DEFAULT_DB_PATH
@@ -1442,7 +1456,7 @@ def show_data_sources_page():
             st.rerun()
     with col3:
         if st.session_state.current_db == DEFAULT_DB_PATH:
-            st.write("✅ Active")
+            st.markdown('<span style="color: #10b981;"><i class="fa-solid fa-circle-check"></i> Active</span>', unsafe_allow_html=True)
     
     # List user files
     for file in user_files:
@@ -1451,7 +1465,7 @@ def show_data_sources_page():
         
         col1, col2, col3 = st.columns([3, 1, 1])
         with col1:
-            st.write(f"📄 **{filename}**")
+            st.markdown(f'<p><i class="fa-solid fa-file" style="color: #667eea; margin-right: 8px;"></i><b>{filename}</b></p>', unsafe_allow_html=True)
             st.caption(f"Uploaded: {uploaded_at[:10]}")
         with col2:
             if st.button("Use", key=f"use_{file_id}"):
@@ -1463,7 +1477,7 @@ def show_data_sources_page():
                     st.error("Database file not found")
         with col3:
             if st.session_state.current_db == db_path:
-                st.write("✅ Active")
+                st.markdown('<span style="color: #10b981;"><i class="fa-solid fa-circle-check"></i> Active</span>', unsafe_allow_html=True)
     
     if not user_files:
         st.info("No files uploaded yet. Upload your first dataset above!")
@@ -1474,13 +1488,13 @@ def show_data_sources_page():
 
 def show_history_page():
     """Query history page"""
-    st.markdown("### 📜 Query History")
+    st.markdown('<h3><i class="fa-solid fa-clock-rotate-left" style="color: #667eea; margin-right: 10px;"></i>Query History</h3>', unsafe_allow_html=True)
     
     tier = st.session_state.user["subscription_tier"]
     
     if tier == "free":
-        st.warning("⚠️ Query history is available on Starter plan and above.")
-        st.button("⚡ Upgrade to Starter", on_click=lambda: st.session_state.update({"show_pricing": True}))
+        st.warning("Query history is available on Starter plan and above.")
+        st.button("Upgrade to Starter", on_click=lambda: st.session_state.update({"show_pricing": True}))
         return
     
     # Get history
@@ -1489,7 +1503,7 @@ def show_history_page():
     if history:
         col1, col2 = st.columns([3, 1])
         with col2:
-            if st.button("🗑️ Clear History"):
+            if st.button("Clear History"):
                 clear_query_history(st.session_state.user["id"])
                 st.success("History cleared!")
                 st.rerun()
@@ -1507,7 +1521,7 @@ def show_history_page():
                     st.text(preview[:300] + "..." if len(preview) > 300 else preview)
                 
                 # Re-run button
-                if st.button("🔄 Run Again", key=f"rerun_{idx}"):
+                if st.button("Run Again", key=f"rerun_{idx}"):
                     result = run_query(sql, st.session_state.current_db)
                     st.session_state.result_df = result
                     st.session_state.sql_code = sql
@@ -1521,7 +1535,7 @@ def show_history_page():
 
 def show_settings_page():
     """Settings page"""
-    st.markdown("### ⚙️ Settings")
+    st.markdown('<h3><i class="fa-solid fa-gear" style="color: #667eea; margin-right: 10px;"></i>Settings</h3>', unsafe_allow_html=True)
     
     user = st.session_state.user
     user_info = get_user_info(user["id"])
@@ -1532,7 +1546,7 @@ def show_settings_page():
         return
     
     # Account info
-    st.markdown("#### 👤 Account Information")
+    st.markdown('<h4><i class="fa-solid fa-user" style="color: #764ba2; margin-right: 8px;"></i>Account Information</h4>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         st.text_input("Name", value=user_info["name"], disabled=True)
@@ -1542,7 +1556,7 @@ def show_settings_page():
     st.divider()
     
     # Subscription info
-    st.markdown("#### 💎 Subscription")
+    st.markdown('<h4><i class="fa-solid fa-crown" style="color: #f59e0b; margin-right: 8px;"></i>Subscription</h4>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         tier_display = user_info["subscription_tier"].upper() if user_info["subscription_tier"] else "FREE"
@@ -1556,17 +1570,17 @@ def show_settings_page():
         st.text_input("Expires", value=expires_display, disabled=True)
     
     if user_info["subscription_tier"] != "enterprise":
-        if st.button("⚡ Upgrade Plan"):
+        if st.button("Upgrade Plan"):
             st.session_state.show_pricing = True
             st.rerun()
     
     st.divider()
     
     # Danger zone
-    st.markdown("#### ⚠️ Danger Zone")
+    st.markdown('<h4><i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; margin-right: 8px;"></i>Danger Zone</h4>', unsafe_allow_html=True)
     with st.expander("Delete Account"):
         st.warning("This action cannot be undone. All your data will be permanently deleted.")
-        if st.button("🗑️ Delete My Account", type="secondary"):
+        if st.button("Delete My Account", type="secondary"):
             st.error("Contact support@yourdomain.com to delete your account")
 
 # ============================================================
@@ -1583,25 +1597,25 @@ st.markdown(
     """
     <div class="footer-container">
         <div class="footer-brand">
-            <span class="footer-logo">📊</span>
+            <span class="footer-logo"><i class="fa-solid fa-chart-line"></i></span>
             <span class="footer-title">AI Data Analyst Pro</span>
         </div>
         <p class="footer-tagline">Transform your data into insights with the power of AI</p>
         <div class="footer-links">
             <a href="https://www.linkedin.com/in/sukumar-jujjuvarapu/" target="_blank" class="footer-link">
-                <span>💼</span> LinkedIn
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
             </a>
             <span class="footer-divider">•</span>
             <a href="https://github.com/SukumarJujjuvarapu" target="_blank" class="footer-link">
-                <span>🐙</span> GitHub
+                <i class="fa-brands fa-github"></i> GitHub
             </a>
             <span class="footer-divider">•</span>
             <a href="https://sukumarjujjuvarapu.github.io/" target="_blank" class="footer-link">
-                <span>🌐</span> Portfolio
+                <i class="fa-solid fa-globe"></i> Portfolio
             </a>
         </div>
         <div class="footer-bottom">
-            <p>🇮🇳 Made with ❤️ in India by <b>Sukumar Jujjuvarapu</b></p>
+            <p><i class="fa-solid fa-flag" style="color: #ff9933;"></i> Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> in India by <b>Sukumar Jujjuvarapu</b></p>
             <p class="footer-copyright">© 2025 AI Data Analyst Pro. All rights reserved.</p>
         </div>
     </div>
@@ -1623,6 +1637,7 @@ st.markdown(
     }
     .footer-logo {
         font-size: 2rem;
+        color: #667eea;
         animation: pulse 2s infinite;
     }
     @keyframes pulse {
