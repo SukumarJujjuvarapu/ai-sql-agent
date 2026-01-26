@@ -53,8 +53,11 @@ if not os.path.exists(DEFAULT_DB_PATH):
 
 # Initialize Razorpay Client
 try:
-    razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
-except:
+    if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET:
+        razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+    else:
+        razorpay_client = None
+except Exception:
     razorpay_client = None
 
 # Initialize Groq Client
@@ -248,6 +251,10 @@ def check_query_limit(user_id, tier):
     user_info = get_user_info(user_id)
     today = datetime.now().date().isoformat()
     
+    # Handle case where user_info is None or last_query_date is None
+    if user_info is None:
+        return True, limits.get(tier, 5)
+    
     if user_info["last_query_date"] != today:
         return True, limits.get(tier, 5)
     
@@ -294,8 +301,11 @@ def clear_query_history(user_id):
 
 def save_uploaded_file(user_id, uploaded_file, file_type):
     """Save uploaded file and return path"""
-    # Create uploads directory
-    upload_dir = f"uploads/user_{user_id}"
+    # Create uploads directory - use /tmp for cloud deployment
+    if os.path.exists("/tmp"):
+        upload_dir = f"/tmp/uploads/user_{user_id}"
+    else:
+        upload_dir = f"uploads/user_{user_id}"
     os.makedirs(upload_dir, exist_ok=True)
     
     # Generate unique filename
@@ -701,7 +711,7 @@ def show_pricing_page():
         st.markdown("""
         <div class="pricing-card">
             <h3>🆓 Free</h3>
-            <h2>$0</h2>
+            <h2>₹0</h2>
             <p>Forever free</p>
             <hr>
             <p>✅ 5 queries/day</p>
@@ -1208,11 +1218,12 @@ else:
 st.markdown("---")
 st.markdown(
     """
-    <div style="text-align: center; color: grey;">
-        <p>Developed by <b>Sukumar Jujjuvarapu</b></p>
+    <div style="text-align: center; color: grey; padding: 10px;">
+        <p>🇮🇳 Made in India by <b>Sukumar Jujjuvarapu</b></p>
         <a href="https://www.linkedin.com/in/sukumar-jujjuvarapu/" target="_blank">LinkedIn</a> | 
         <a href="https://github.com/SukumarJujjuvarapu" target="_blank">GitHub</a> |
         <a href="https://sukumarjujjuvarapu.github.io/" target="_blank">Portfolio</a>
+        <p style="font-size: 0.8em; margin-top: 10px;">© 2026 AI Data Analyst Pro. All rights reserved.</p>
     </div>
     """,
     unsafe_allow_html=True
