@@ -909,73 +909,109 @@ st.markdown("""
     @media screen and (max-width: 768px) {
         /* Main header - smaller on mobile */
         .main-header {
-            font-size: 1.8rem !important;
-            padding: 1rem 0.5rem !important;
-            line-height: 1.3;
+            font-size: 1.6rem !important;
+            padding: 0.8rem 0.5rem !important;
+            line-height: 1.4 !important;
+            word-wrap: break-word !important;
         }
         
         /* Hero subtitle */
         .hero-subtitle {
-            font-size: 0.95rem !important;
-            padding: 0 1rem;
-            line-height: 1.5;
+            font-size: 0.9rem !important;
+            padding: 0 0.5rem !important;
+            line-height: 1.6 !important;
+            word-wrap: break-word !important;
+        }
+        
+        /* All text elements - ensure visibility */
+        p, span, label, div {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
         }
         
         /* Feature cards - stack and smaller */
         .feature-card {
             padding: 1rem !important;
             margin-bottom: 0.5rem;
+            min-height: auto !important;
         }
         .feature-card h4 {
-            font-size: 0.95rem !important;
+            font-size: 0.9rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 0.3rem !important;
+            word-wrap: break-word !important;
         }
         .feature-card p {
-            font-size: 0.8rem !important;
+            font-size: 0.75rem !important;
+            line-height: 1.4 !important;
+            color: #64748b !important;
+            word-wrap: break-word !important;
         }
         .feature-icon {
-            font-size: 1.8rem !important;
+            font-size: 1.5rem !important;
             margin-bottom: 0.5rem !important;
         }
         .feature-icon i {
-            font-size: 1.8rem !important;
+            font-size: 1.5rem !important;
         }
         
         /* Pricing cards - mobile optimized */
         .pricing-card {
-            padding: 1.2rem !important;
+            padding: 1rem !important;
             margin-bottom: 1rem;
-            border-radius: 16px !important;
+            border-radius: 14px !important;
         }
         .pricing-card h2 {
-            font-size: 1.8rem !important;
+            font-size: 1.6rem !important;
+            line-height: 1.2 !important;
         }
         .pricing-card h3 {
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
         }
         .pricing-card p {
-            font-size: 0.85rem !important;
-            margin: 0.3rem 0 !important;
+            font-size: 0.8rem !important;
+            margin: 0.25rem 0 !important;
+            line-height: 1.4 !important;
+        }
+        .pricing-card i {
+            font-size: 0.8rem !important;
         }
         
         /* Buttons - full width and touch-friendly */
         .stButton > button {
-            padding: 0.8rem 1rem !important;
-            font-size: 0.9rem !important;
-            min-height: 48px;
+            padding: 0.75rem 0.8rem !important;
+            font-size: 0.85rem !important;
+            min-height: 44px !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
         }
         
         /* Form inputs - larger touch targets */
         .stTextInput > div > div > input {
-            padding: 0.9rem 1rem !important;
+            padding: 0.8rem 0.75rem !important;
             font-size: 16px !important; /* Prevents zoom on iOS */
+        }
+        
+        /* Labels and captions */
+        .stTextInput label, .stSelectbox label {
+            font-size: 0.85rem !important;
+        }
+        .stCaption, [data-testid="stCaptionContainer"] {
+            font-size: 0.75rem !important;
+            line-height: 1.4 !important;
         }
         
         /* Sidebar adjustments */
         [data-testid="stSidebar"] {
-            min-width: 250px !important;
+            min-width: 240px !important;
+            padding: 0.5rem !important;
         }
-        [data-testid="stSidebar"] h3 {
-            font-size: 1.1rem !important;
+        [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4 {
+            font-size: 1rem !important;
+            line-height: 1.3 !important;
+        }
+        [data-testid="stSidebar"] p, [data-testid="stSidebar"] span {
+            font-size: 0.85rem !important;
         }
         
         /* Tabs - scrollable on mobile */
@@ -987,8 +1023,8 @@ st.markdown("""
             padding: 2px !important;
         }
         .stTabs [data-baseweb="tab"] {
-            padding: 8px 16px !important;
-            font-size: 0.85rem !important;
+            padding: 8px 12px !important;
+            font-size: 0.8rem !important;
             white-space: nowrap;
         }
         
@@ -996,113 +1032,191 @@ st.markdown("""
         .stDataFrame {
             overflow-x: auto !important;
             -webkit-overflow-scrolling: touch;
+            font-size: 0.8rem !important;
         }
         
         /* Download buttons - stack */
         .stDownloadButton > button {
-            padding: 0.7rem !important;
-            font-size: 0.85rem !important;
-            min-height: 44px;
+            padding: 0.6rem 0.5rem !important;
+            font-size: 0.8rem !important;
+            min-height: 40px !important;
         }
         
         /* Columns - prevent overflow */
         [data-testid="column"] {
-            padding: 0 0.25rem !important;
+            padding: 0 0.15rem !important;
+            min-width: 0 !important;
         }
         
         /* File uploader */
         .stFileUploader {
-            padding: 0.75rem !important;
+            padding: 0.6rem !important;
+        }
+        .stFileUploader label {
+            font-size: 0.85rem !important;
         }
         
         /* Expanders */
         .streamlit-expanderHeader {
-            font-size: 0.9rem !important;
-            padding: 0.75rem !important;
+            font-size: 0.85rem !important;
+            padding: 0.6rem !important;
+            line-height: 1.3 !important;
         }
         
         /* Footer - mobile optimized */
         .footer-container {
-            padding: 25px 15px !important;
-            margin-top: 30px !important;
-            border-radius: 16px !important;
+            padding: 20px 12px !important;
+            margin-top: 25px !important;
+            border-radius: 14px !important;
         }
         .footer-brand {
             flex-direction: column !important;
-            gap: 8px !important;
+            gap: 6px !important;
         }
         .footer-logo {
-            font-size: 1.5rem !important;
+            font-size: 1.3rem !important;
         }
         .footer-title {
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
         }
         .footer-tagline {
-            font-size: 0.85rem !important;
-            padding: 0 10px;
+            font-size: 0.8rem !important;
+            padding: 0 8px !important;
+            line-height: 1.4 !important;
         }
         .footer-links {
             flex-direction: column !important;
-            gap: 10px !important;
+            gap: 8px !important;
         }
         .footer-link {
-            padding: 10px 20px !important;
-            width: 80%;
+            padding: 8px 16px !important;
+            width: 85% !important;
             justify-content: center;
+            font-size: 0.85rem !important;
         }
         .footer-divider {
             display: none !important;
         }
         .footer-bottom p {
-            font-size: 0.85rem !important;
+            font-size: 0.8rem !important;
+            line-height: 1.4 !important;
         }
         .footer-copyright {
-            font-size: 0.75rem !important;
+            font-size: 0.7rem !important;
         }
         
         /* Section headers */
         h3, h4 {
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
+            line-height: 1.3 !important;
+            word-wrap: break-word !important;
+        }
+        h3 i, h4 i {
+            font-size: 1rem !important;
+            margin-right: 6px !important;
         }
         
         /* Info boxes */
         .stAlert {
-            padding: 0.75rem !important;
-            font-size: 0.9rem !important;
+            padding: 0.6rem !important;
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+        }
+        .stAlert p {
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
         }
         
         /* Code blocks */
         .stCodeBlock {
-            font-size: 0.8rem !important;
+            font-size: 0.75rem !important;
+            overflow-x: auto !important;
+        }
+        .stCodeBlock code {
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
         }
         
         /* Selectbox */
         .stSelectbox > div > div {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Radio buttons */
+        .stRadio label {
+            font-size: 0.85rem !important;
+        }
+        .stRadio [data-testid="stMarkdownContainer"] {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Markdown text */
+        [data-testid="stMarkdownContainer"] p {
             font-size: 0.9rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* Trust indicators */
+        .trust-indicator h3 {
+            font-size: 1.5rem !important;
+        }
+        .trust-indicator p {
+            font-size: 0.8rem !important;
         }
     }
     
     /* Extra small devices */
     @media screen and (max-width: 480px) {
         .main-header {
-            font-size: 1.5rem !important;
+            font-size: 1.3rem !important;
+            padding: 0.5rem !important;
         }
         
+        .hero-subtitle {
+            font-size: 0.8rem !important;
+        }
+        
+        .pricing-card {
+            padding: 0.8rem !important;
+        }
         .pricing-card h2 {
-            font-size: 1.5rem !important;
+            font-size: 1.4rem !important;
+        }
+        .pricing-card p {
+            font-size: 0.75rem !important;
         }
         
+        .feature-card {
+            padding: 0.75rem !important;
+        }
+        .feature-card h4 {
+            font-size: 0.85rem !important;
+        }
         .feature-icon i {
-            font-size: 1.5rem !important;
+            font-size: 1.3rem !important;
         }
         
         /* Stack columns vertically */
         [data-testid="stHorizontalBlock"] {
             flex-direction: column !important;
+            gap: 0.5rem !important;
         }
         [data-testid="stHorizontalBlock"] > [data-testid="column"] {
             width: 100% !important;
+            max-width: 100% !important;
+            flex: 1 1 100% !important;
             margin-bottom: 0.5rem;
+        }
+        
+        /* Buttons even smaller */
+        .stButton > button {
+            font-size: 0.8rem !important;
+            padding: 0.6rem !important;
+        }
+        
+        /* Section headers */
+        h3, h4 {
+            font-size: 0.95rem !important;
         }
     }
     
