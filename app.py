@@ -597,10 +597,17 @@ if "current_question" not in st.session_state:
 # ============================================================
 
 st.markdown("""
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     /* ========== GLOBAL STYLES ========== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Prevent horizontal scroll on mobile */
+    html, body, [data-testid="stAppViewContainer"] {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
     
     /* Font Awesome icon styling */
     .fa-icon {
@@ -896,6 +903,230 @@ st.markdown("""
         height: 2px;
         background: linear-gradient(90deg, transparent, #667eea, transparent);
         margin: 2rem 0;
+    }
+    
+    /* ========== MOBILE RESPONSIVE STYLES ========== */
+    @media screen and (max-width: 768px) {
+        /* Main header - smaller on mobile */
+        .main-header {
+            font-size: 1.8rem !important;
+            padding: 1rem 0.5rem !important;
+            line-height: 1.3;
+        }
+        
+        /* Hero subtitle */
+        .hero-subtitle {
+            font-size: 0.95rem !important;
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Feature cards - stack and smaller */
+        .feature-card {
+            padding: 1rem !important;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card h4 {
+            font-size: 0.95rem !important;
+        }
+        .feature-card p {
+            font-size: 0.8rem !important;
+        }
+        .feature-icon {
+            font-size: 1.8rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .feature-icon i {
+            font-size: 1.8rem !important;
+        }
+        
+        /* Pricing cards - mobile optimized */
+        .pricing-card {
+            padding: 1.2rem !important;
+            margin-bottom: 1rem;
+            border-radius: 16px !important;
+        }
+        .pricing-card h2 {
+            font-size: 1.8rem !important;
+        }
+        .pricing-card h3 {
+            font-size: 1.1rem !important;
+        }
+        .pricing-card p {
+            font-size: 0.85rem !important;
+            margin: 0.3rem 0 !important;
+        }
+        
+        /* Buttons - full width and touch-friendly */
+        .stButton > button {
+            padding: 0.8rem 1rem !important;
+            font-size: 0.9rem !important;
+            min-height: 48px;
+        }
+        
+        /* Form inputs - larger touch targets */
+        .stTextInput > div > div > input {
+            padding: 0.9rem 1rem !important;
+            font-size: 16px !important; /* Prevents zoom on iOS */
+        }
+        
+        /* Sidebar adjustments */
+        [data-testid="stSidebar"] {
+            min-width: 250px !important;
+        }
+        [data-testid="stSidebar"] h3 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Tabs - scrollable on mobile */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            gap: 4px !important;
+            padding: 2px !important;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: 8px 16px !important;
+            font-size: 0.85rem !important;
+            white-space: nowrap;
+        }
+        
+        /* Data tables - horizontal scroll */
+        .stDataFrame {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Download buttons - stack */
+        .stDownloadButton > button {
+            padding: 0.7rem !important;
+            font-size: 0.85rem !important;
+            min-height: 44px;
+        }
+        
+        /* Columns - prevent overflow */
+        [data-testid="column"] {
+            padding: 0 0.25rem !important;
+        }
+        
+        /* File uploader */
+        .stFileUploader {
+            padding: 0.75rem !important;
+        }
+        
+        /* Expanders */
+        .streamlit-expanderHeader {
+            font-size: 0.9rem !important;
+            padding: 0.75rem !important;
+        }
+        
+        /* Footer - mobile optimized */
+        .footer-container {
+            padding: 25px 15px !important;
+            margin-top: 30px !important;
+            border-radius: 16px !important;
+        }
+        .footer-brand {
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+        .footer-logo {
+            font-size: 1.5rem !important;
+        }
+        .footer-title {
+            font-size: 1.2rem !important;
+        }
+        .footer-tagline {
+            font-size: 0.85rem !important;
+            padding: 0 10px;
+        }
+        .footer-links {
+            flex-direction: column !important;
+            gap: 10px !important;
+        }
+        .footer-link {
+            padding: 10px 20px !important;
+            width: 80%;
+            justify-content: center;
+        }
+        .footer-divider {
+            display: none !important;
+        }
+        .footer-bottom p {
+            font-size: 0.85rem !important;
+        }
+        .footer-copyright {
+            font-size: 0.75rem !important;
+        }
+        
+        /* Section headers */
+        h3, h4 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Info boxes */
+        .stAlert {
+            padding: 0.75rem !important;
+            font-size: 0.9rem !important;
+        }
+        
+        /* Code blocks */
+        .stCodeBlock {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Selectbox */
+        .stSelectbox > div > div {
+            font-size: 0.9rem !important;
+        }
+    }
+    
+    /* Extra small devices */
+    @media screen and (max-width: 480px) {
+        .main-header {
+            font-size: 1.5rem !important;
+        }
+        
+        .pricing-card h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Stack columns vertically */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            width: 100% !important;
+            margin-bottom: 0.5rem;
+        }
+    }
+    
+    /* Touch-friendly improvements */
+    @media (hover: none) and (pointer: coarse) {
+        .stButton > button:active {
+            transform: scale(0.98);
+        }
+        
+        .pricing-card:active {
+            transform: scale(0.98);
+        }
+        
+        .feature-card:active {
+            transform: scale(0.98);
+        }
+        
+        /* Disable hover effects that don't work on touch */
+        .pricing-card:hover {
+            transform: none;
+        }
+        .feature-card:hover {
+            transform: none;
+        }
     }
 </link>
 """, unsafe_allow_html=True)
