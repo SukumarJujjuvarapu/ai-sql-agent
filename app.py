@@ -232,6 +232,11 @@ def update_query_count(user_id):
     cursor.execute("SELECT last_query_date, queries_today FROM users WHERE id = ?", (user_id,))
     result = cursor.fetchone()
     
+    # Handle case where user doesn't exist
+    if result is None:
+        conn.close()
+        return 1
+    
     if result[0] == today:
         new_count = (result[1] or 0) + 1
     else:
@@ -343,25 +348,35 @@ def get_user_files(user_id):
 
 def csv_to_sqlite(csv_path, db_path, table_name="data"):
     """Convert CSV file to SQLite database"""
-    df = pd.read_csv(csv_path)
-    conn = sqlite3.connect(db_path)
-    df.to_sql(table_name, conn, if_exists='replace', index=False)
-    conn.close()
-    return db_path
+    try:
+        df = pd.read_csv(csv_path)
+        if df.empty:
+            raise ValueError("CSV file is empty")
+        conn = sqlite3.connect(db_path)
+        df.to_sql(table_name, conn, if_exists='replace', index=False)
+        conn.close()
+        return db_path
+    except Exception as e:
+        raise Exception(f"Error converting CSV: {str(e)}")
 
 def excel_to_sqlite(excel_path, db_path):
     """Convert Excel file to SQLite database (each sheet = table)"""
-    excel_file = pd.ExcelFile(excel_path)
-    conn = sqlite3.connect(db_path)
-    
-    for sheet_name in excel_file.sheet_names:
-        df = pd.read_excel(excel_file, sheet_name=sheet_name)
-        # Clean sheet name for SQL table
-        clean_name = sheet_name.replace(" ", "_").replace("-", "_")
-        df.to_sql(clean_name, conn, if_exists='replace', index=False)
-    
-    conn.close()
-    return db_path
+    try:
+        excel_file = pd.ExcelFile(excel_path)
+        if not excel_file.sheet_names:
+            raise ValueError("Excel file has no sheets")
+        conn = sqlite3.connect(db_path)
+        
+        for sheet_name in excel_file.sheet_names:
+            df = pd.read_excel(excel_file, sheet_name=sheet_name)
+            # Clean sheet name for SQL table
+            clean_name = sheet_name.replace(" ", "_").replace("-", "_")
+            df.to_sql(clean_name, conn, if_exists='replace', index=False)
+        
+        conn.close()
+        return db_path
+    except Exception as e:
+        raise Exception(f"Error converting Excel: {str(e)}")
 
 # ============================================================
 #                    SQL & AI FUNCTIONS
@@ -822,8 +837,13 @@ def show_main_app():
         # Query limit indicator
         user_info = get_user_info(user["id"])
         limits = {"free": 5, "starter": 50, "pro": 500, "enterprise": 99999}
-        remaining = limits.get(tier, 5) - (user_info["queries_today"] if user_info["last_query_date"] == datetime.now().date().isoformat() else 0)
-        st.progress(remaining / limits.get(tier, 5))
+        if user_info:
+            queries_today = user_info["queries_today"] if user_info["last_query_date"] == datetime.now().date().isoformat() else 0
+            remaining = limits.get(tier, 5) - queries_today
+        else:
+            remaining = limits.get(tier, 5)
+        remaining = max(0, remaining)  # Ensure non-negative
+        st.progress(min(1.0, remaining / limits.get(tier, 5)))
         st.caption(f"🔥 {remaining} queries remaining today")
         
         st.divider()
@@ -874,7 +894,14 @@ def show_main_app():
     # --- QUERY DATA PAGE (Default) ---
     
     # Current database info
-    db_name = os.path.basename(st.session_state.current_db)
+    db_name = os.path.basename(st.session_state.current_db) if st.session_state.current_db else "No database selected"
+    
+    # Check if database exists
+    if st.session_state.current_db and not os.path.exists(st.session_state.current_db):
+        st.warning(f"⚠️ Database file not found. Switching to default sample database.")
+        st.session_state.current_db = DEFAULT_DB_PATH
+        db_name = os.path.basename(DEFAULT_DB_PATH)
+    
     st.info(f"📊 **Active Database:** {db_name}")
     
     # Query input
@@ -995,22 +1022,28 @@ def show_main_app():
                     numeric_df = chart_data.select_dtypes(include=['number'])
                     
                     if not numeric_df.empty:
-                        if chart_type == "Bar Chart":
-                            st.bar_chart(numeric_df)
-                        elif chart_type == "Line Chart":
-                            st.line_chart(numeric_df)
-                        elif chart_type == "Area Chart":
-                            st.area_chart(numeric_df)
-                        elif chart_type == "Scatter Plot":
-                            st.scatter_chart(numeric_df)
-                        elif chart_type == "Pie Chart":
-                            fig = px.pie(
-                                result,
-                                names=result.columns[0],
-                                values=numeric_df.columns[0],
-                                title="Distribution"
-                            )
-                            st.plotly_chart(fig, use_container_width=True)
+                        try:
+                            if chart_type == "Bar Chart":
+                                st.bar_chart(numeric_df)
+                            elif chart_type == "Line Chart":
+                                st.line_chart(numeric_df)
+                            elif chart_type == "Area Chart":
+                                st.area_chart(numeric_df)
+                            elif chart_type == "Scatter Plot":
+                                st.scatter_chart(numeric_df)
+                            elif chart_type == "Pie Chart":
+                                if len(numeric_df.columns) > 0:
+                                    fig = px.pie(
+                                        result,
+                                        names=result.columns[0],
+                                        values=numeric_df.columns[0],
+                                        title="Distribution"
+                                    )
+                                    st.plotly_chart(fig, use_container_width=True)
+                                else:
+                                    st.warning("No numeric column for pie chart")
+                        except Exception as e:
+                            st.warning(f"Could not render chart: {str(e)}")
                     else:
                         st.warning("No numeric data available for visualization")
         else:
@@ -1143,7 +1176,9 @@ def show_history_page():
                 st.rerun()
         
         for idx, (question, sql, preview, timestamp) in enumerate(history):
-            with st.expander(f"**{question[:50]}{'...' if len(question) > 50 else ''}** - {timestamp[:16]}"):
+            timestamp_display = timestamp[:16] if timestamp and len(timestamp) >= 16 else (timestamp or "Unknown")
+            question_display = question[:50] if question else "No question"
+            with st.expander(f"**{question_display}{'...' if question and len(question) > 50 else ''}** - {timestamp_display}"):
                 st.markdown("**Question:**")
                 st.write(question)
                 st.markdown("**SQL Query:**")
@@ -1172,6 +1207,11 @@ def show_settings_page():
     user = st.session_state.user
     user_info = get_user_info(user["id"])
     
+    # Handle case where user_info is None
+    if user_info is None:
+        st.error("Unable to load user information. Please log out and log in again.")
+        return
+    
     # Account info
     st.markdown("#### 👤 Account Information")
     col1, col2 = st.columns(2)
@@ -1186,10 +1226,15 @@ def show_settings_page():
     st.markdown("#### 💎 Subscription")
     col1, col2 = st.columns(2)
     with col1:
-        st.text_input("Current Plan", value=user_info["subscription_tier"].upper(), disabled=True)
+        tier_display = user_info["subscription_tier"].upper() if user_info["subscription_tier"] else "FREE"
+        st.text_input("Current Plan", value=tier_display, disabled=True)
     with col2:
-        expires = user_info["subscription_expires"] or "N/A"
-        st.text_input("Expires", value=expires[:10] if expires != "N/A" else expires, disabled=True)
+        expires = user_info["subscription_expires"]
+        if expires and len(expires) >= 10:
+            expires_display = expires[:10]
+        else:
+            expires_display = "N/A"
+        st.text_input("Expires", value=expires_display, disabled=True)
     
     if user_info["subscription_tier"] != "enterprise":
         if st.button("⚡ Upgrade Plan"):
