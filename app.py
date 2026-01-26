@@ -1317,6 +1317,12 @@ st.markdown("""
         /* Section headers */
         h3, h4 {
             font-size: 0.95rem !important;
+            color: #1e293b !important;
+        }
+        
+        /* Ensure all text is visible on mobile */
+        .pricing-card h3, .pricing-card p, .feature-card h4, .feature-card p {
+            color: #1e293b !important;
         }
     }
     
@@ -1354,8 +1360,8 @@ def show_auth_page():
     # Hero Section
     st.markdown('''
     <div style="text-align: center; padding: 2rem 0;">
-        <h1 class="main-header"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>
-        <p class="hero-subtitle">Transform your data into powerful insights using natural language.<br>
+        <h1 class="main-header" style="color: #1e293b;"><i class="fa-solid fa-robot" style="margin-right: 12px;"></i>AI Data Analyst Pro</h1>
+        <p class="hero-subtitle" style="color: #475569;">Transform your data into powerful insights using natural language.<br>
         <span style="color: #667eea; font-weight: 600;">No SQL knowledge required.</span></p>
     </div>
     ''', unsafe_allow_html=True)
@@ -1426,7 +1432,7 @@ def show_auth_page():
         <div class="feature-card">
             <div class="feature-icon"><i class="fa-solid fa-chart-pie" style="color: #667eea;"></i></div>
             <h4 style="color: #1e293b; font-weight: 600;">Smart Charts</h4>
-            <p>Auto-generate beautiful visualizations</p>
+            <p style="color: #475569;">Auto-generate beautiful visualizations</p>
         </div>
         ''', unsafe_allow_html=True)
     with col2:
@@ -1434,7 +1440,7 @@ def show_auth_page():
         <div class="feature-card">
             <div class="feature-icon"><i class="fa-solid fa-comments" style="color: #764ba2;"></i></div>
             <h4 style="color: #1e293b; font-weight: 600;">Natural Language</h4>
-            <p>Ask questions in plain English</p>
+            <p style="color: #475569;">Ask questions in plain English</p>
         </div>
         ''', unsafe_allow_html=True)
     with col3:
@@ -1442,7 +1448,7 @@ def show_auth_page():
         <div class="feature-card">
             <div class="feature-icon"><i class="fa-solid fa-database" style="color: #f59e0b;"></i></div>
             <h4 style="color: #1e293b; font-weight: 600;">Any Data Source</h4>
-            <p>CSV, Excel, or SQLite databases</p>
+            <p style="color: #475569;">CSV, Excel, or SQLite databases</p>
         </div>
         ''', unsafe_allow_html=True)
     with col4:
@@ -1450,7 +1456,7 @@ def show_auth_page():
         <div class="feature-card">
             <div class="feature-icon"><i class="fa-solid fa-file-export" style="color: #10b981;"></i></div>
             <h4 style="color: #1e293b; font-weight: 600;">Export Anywhere</h4>
-            <p>Download as PDF, Excel, or CSV</p>
+            <p style="color: #475569;">Download as PDF, Excel, or CSV</p>
         </div>
         ''', unsafe_allow_html=True)
     
