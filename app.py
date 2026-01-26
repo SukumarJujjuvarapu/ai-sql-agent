@@ -1634,8 +1634,31 @@ def show_main_app():
         else:
             remaining = limits.get(tier, 5)
         remaining = max(0, remaining)  # Ensure non-negative
-        st.progress(min(1.0, remaining / limits.get(tier, 5)))
-        st.caption(f"{remaining} queries remaining today")
+        total = limits.get(tier, 5)
+        percentage = min(100, (remaining / total) * 100)
+        
+        # Custom styled progress bar
+        st.markdown(f'''
+        <div style="margin: 1rem 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 0.8rem; color: #a0aec0;">Queries</span>
+                <span style="font-size: 0.8rem; color: #e2e8f0; font-weight: 600;">{remaining}/{total}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px; overflow: hidden;">
+                <div style="
+                    width: {percentage}%;
+                    height: 100%;
+                    background: linear-gradient(90deg, #667eea, #764ba2, #a855f7);
+                    border-radius: 10px;
+                    transition: width 0.5s ease;
+                "></div>
+            </div>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px; text-align: center;">
+                <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-right: 4px;"></i>
+                {remaining} remaining today
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
         
         st.divider()
         
