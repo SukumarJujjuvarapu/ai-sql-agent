@@ -1,7 +1,8 @@
+import os
 from google import genai
 
-# Paste your key here again
-client = genai.Client(api_key="AIzaSyAYF0PvO484gPU5KLRG2-1NB31FML0U8eg")
+# Set GOOGLE_API_KEY in environment
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", ""))
 
 print("Checking available models...")
 try:

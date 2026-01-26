@@ -2,7 +2,7 @@ from google import genai
 import os
 
 # --- PASTE YOUR NEW KEY HERE ---
-client = genai.Client(api_key="AIzaSyAYF0PvO484gPU5KLRG2-1NB31FML0U8eg")
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", ""))
 
 print("Attempting to connect to Gemini 1.5 Flash...")
 
