@@ -69,6 +69,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# --- RAZORPAY VERIFICATION META TAG ---
+# This helps Razorpay verify the website ownership
+st.markdown("""
+<meta name="razorpay-site-verification" content="ai-data-analyst-pro-sukumar" />
+""", unsafe_allow_html=True)
+
 # ============================================================
 #                    DATABASE SETUP
 # ============================================================
