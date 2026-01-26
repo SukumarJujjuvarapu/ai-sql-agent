@@ -895,9 +895,20 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 600 !important;
     }
+    /* Sidebar Progress Bar - Force purple gradient */
+    [data-testid="stSidebar"] .stProgress > div,
     [data-testid="stSidebar"] .stProgress > div > div,
-    [data-testid="stSidebar"] .stProgress > div > div > div {
-        background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+    [data-testid="stSidebar"] .stProgress > div > div > div,
+    [data-testid="stSidebar"] [data-testid="stProgressBar"] > div,
+    [data-testid="stSidebar"] [role="progressbar"] > div {
+        background: linear-gradient(90deg, #667eea, #764ba2) !important;
+        background-color: #667eea !important;
+    }
+    [data-testid="stSidebar"] .stProgress,
+    [data-testid="stSidebar"] [data-testid="stProgressBar"] {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-radius: 10px !important;
+        overflow: hidden;
     }
     [data-testid="stSidebar"] .stRadio label {
         color: #ffffff !important;
@@ -937,10 +948,18 @@ st.markdown("""
         border-radius: var(--radius-md);
     }
     
-    /* ========== PROGRESS BAR ========== */
-    .stProgress > div > div > div {
-        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-        border-radius: var(--radius-sm);
+    /* ========== PROGRESS BAR - Global ========== */
+    .stProgress > div {
+        background: rgba(102, 126, 234, 0.2) !important;
+        border-radius: 10px !important;
+    }
+    .stProgress > div > div,
+    .stProgress > div > div > div,
+    [data-testid="stProgressBar"] > div,
+    [role="progressbar"] > div {
+        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb) !important;
+        background-color: #667eea !important;
+        border-radius: 10px !important;
     }
     
     /* ========== FILE UPLOADER ========== */
