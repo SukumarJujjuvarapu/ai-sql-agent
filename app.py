@@ -840,23 +840,55 @@ st.markdown("""
     
     /* ========== FORM INPUTS ========== */
     .stTextInput > div > div > input,
-    .stTextArea textarea {
+    .stTextArea textarea,
+    .stSelectbox > div > div,
+    .stNumberInput > div > div > input {
         border-radius: var(--radius-md);
         border: 2px solid var(--border-light);
         padding: 0.75rem 1rem;
         font-size: 16px !important;
         transition: var(--transition);
-        background: white;
+        background: #ffffff !important;
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+        caret-color: #1e293b !important;
+    }
+    .stTextInput > div > div > input::placeholder,
+    .stTextArea textarea::placeholder {
+        color: #94a3b8 !important;
+        -webkit-text-fill-color: #94a3b8 !important;
+        opacity: 1 !important;
     }
     .stTextInput > div > div > input:focus,
-    .stTextArea textarea:focus {
+    .stTextArea textarea:focus,
+    .stNumberInput > div > div > input:focus {
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
         outline: none;
+        background: #ffffff !important;
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+    }
+    
+    /* Select box text visibility */
+    .stSelectbox > div > div > div {
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+    }
+    .stSelectbox [data-baseweb="select"] span {
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+    }
+    
+    /* Password input */
+    .stTextInput input[type="password"] {
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+        background: #ffffff !important;
     }
     
     /* Form labels */
-    .stTextInput label, .stSelectbox label, .stFileUploader label, .stTextArea label {
+    .stTextInput label, .stSelectbox label, .stFileUploader label, .stTextArea label, .stNumberInput label {
         color: var(--text-primary) !important;
         font-weight: 500 !important;
         font-size: 0.9rem !important;
@@ -1117,9 +1149,33 @@ st.markdown("""
         }
         
         /* Forms */
-        .stTextInput > div > div > input {
+        .stTextInput > div > div > input,
+        .stTextArea textarea,
+        .stNumberInput > div > div > input {
             padding: 0.75rem !important;
             font-size: 16px !important;
+            background: #ffffff !important;
+            color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
+            caret-color: #1e293b !important;
+            border: 2px solid #e2e8f0 !important;
+        }
+        .stTextInput > div > div > input::placeholder,
+        .stTextArea textarea::placeholder {
+            color: #94a3b8 !important;
+            -webkit-text-fill-color: #94a3b8 !important;
+        }
+        .stSelectbox > div > div > div,
+        .stSelectbox [data-baseweb="select"] span {
+            color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
+        }
+        .stTextInput label,
+        .stSelectbox label,
+        .stTextArea label,
+        .stNumberInput label {
+            color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
         }
         
         /* Tabs */
@@ -1289,17 +1345,36 @@ st.markdown("""
         
         /* ===== FORM INPUTS ===== */
         .stTextInput > div > div > input,
-        .stTextArea textarea {
+        .stTextArea textarea,
+        .stNumberInput > div > div > input {
             font-size: 16px !important;
             padding: 0.875rem !important;
             border-radius: 12px !important;
+            background: #ffffff !important;
+            color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
+            caret-color: #1e293b !important;
+            border: 2px solid #e2e8f0 !important;
+        }
+        .stTextInput > div > div > input::placeholder,
+        .stTextArea textarea::placeholder {
+            color: #94a3b8 !important;
+            -webkit-text-fill-color: #94a3b8 !important;
+            opacity: 1 !important;
+        }
+        .stSelectbox > div > div > div,
+        .stSelectbox [data-baseweb="select"] span {
+            color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
         }
         
         .stTextInput label,
         .stSelectbox label,
-        .stTextArea label {
+        .stTextArea label,
+        .stNumberInput label {
             font-size: 0.9rem !important;
             color: #1e293b !important;
+            -webkit-text-fill-color: #1e293b !important;
             font-weight: 500 !important;
             margin-bottom: 0.4rem !important;
         }
